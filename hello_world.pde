@@ -5,6 +5,7 @@ int warpSize = 50;
 float xNoiseResolution = 0.03;
 float yNoiseResolution = 0.005;
 boolean mouseHover = false;
+int countSpacePresses = 0;
 
 void setup()
 {
@@ -45,4 +46,18 @@ void mouseOut() {
 
 void mouseClicked() {
   link("https://en.wikipedia.org/wiki/Paul_Erd%C5%91s");
+}
+
+void keyPressed() {
+  if ((key == ' ') {
+    src = loadImage("picture.jpg");
+    src.resize(380 + warpSize, 582 + warpSize);
+    if (countSpacePresses % 4 == 1) src.filter(BLUR, 3);
+    else if (countSpacePresses % 4 == 2) src.filter(POSTERIZE, 3);
+    else if (countSpacePresses % 4 == 3) {
+      src.filter(BLUR, 3);
+      src.filter(POSTERIZE, 3);
+    }
+    countSpacePresses++;
+  }
 }
