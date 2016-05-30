@@ -1,3 +1,5 @@
+/* @pjs preload="picture.jpg"; */
+
 PImage src;
 
 void setup()
