@@ -38,6 +38,8 @@ void draw() {
     }
   }
   updatePixels();
+  
+  println(frameCount);
 }
 
 void mouseOver() {
