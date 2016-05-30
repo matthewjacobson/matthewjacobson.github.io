@@ -26,7 +26,7 @@ void draw() {
   else {
     xNoiseResolution = 0.9 * xNoiseResolution;
     yNoiseResolution = 0.9 * yNoiseResolution;
-    warpFade = 0.5 * warpFade;
+    warpFade = 0;
   }
   
   loadPixels();
