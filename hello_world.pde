@@ -37,10 +37,6 @@ void draw() {
   println(countKeyPresses);
 }
 
-interface Javascript {}
-Javascript javascript=null;
-void bindJavascript(Javascript js) { javascript=js; }
-
 void mouseOver() {
   mouseHover = true;
 }
@@ -52,6 +48,10 @@ void mouseOut() {
 void mouseClicked() {
   link("https://en.wikipedia.org/wiki/Paul_Erd%C5%91s");
 }
+
+interface Javascript {}
+Javascript javascript=null;
+void bindJavascript(Javascript js) { javascript=js; }
 
 void keyPressed() {
   if (key == CODED) {
