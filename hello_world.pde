@@ -1,4 +1,3 @@
-/* @pjs globalKeyEvents="true"; */
 /* @pjs preload="picture.jpg"; */
 
 PImage src;
@@ -37,6 +36,10 @@ void draw() {
   }
   println(countKeyPresses);
 }
+
+interface Javascript {}
+Javascript javascript=null;
+void bindJavascript(Javascript js) { javascript=js; }
 
 void mouseOver() {
   mouseHover = true;
