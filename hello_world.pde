@@ -16,6 +16,9 @@ void setup()
 void draw() {
   float sceneRatio = (float(frameCount) - 1) / 200;
   
+  xNoiseResolution = map(mouseX, 0, width, 0.05, 0);
+  yNoiseResolution = map(mousey, 0, height, 0.01, 0);
+  
   if (mouseHover) {
     loadPixels();
     for (int x = 0; x < width; x++) {
@@ -40,7 +43,7 @@ void mouseOut() {
   mouseHover = false;
 }
 
-void mousePressed() {
+void mouseClicked() {
   if(mouseHover) { 
     link("https://en.wikipedia.org/wiki/Paul_Erd%C5%91s", "_new");
   }
