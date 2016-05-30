@@ -5,7 +5,7 @@ int warpSize = 50;
 float xNoiseResolution = 0.03;
 float yNoiseResolution = 0.005;
 boolean mouseHover = false;
-int countSpacePresses = 0;
+int countKeyPresses = 0;
 
 void setup()
 {
@@ -34,7 +34,7 @@ void draw() {
   else {
     image(src, 0, 0);
   }
-  println(countSpacePresses);
+  println(countKeyPresses);
 }
 
 void mouseOver() {
@@ -50,13 +50,14 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (key == " ") {
-    countSpacePresses++;
+  if (keyCode == RIGHT || keyCode == LEFT) {
     src = loadImage("picture.jpg");
     src.resize(380 + warpSize, 582 + warpSize);
-    if (countSpacePresses % 4 == 1) src.filter(BLUR, 3);
-    else if (countSpacePresses % 4 == 2) src.filter(POSTERIZE, 3);
-    else if (countSpacePresses % 4 == 3) {
+    if (keyCode == RIGHT) countKeyPresses++;
+    if (keyCode == LEFT) countKeyPresses--;
+    if (countKeyPresses % 4 == 1) src.filter(BLUR, 3);
+    else if (countKeyPresses % 4 == 2) src.filter(POSTERIZE, 3);
+    else if (countKeyPresses % 4 == 3) {
       src.filter(BLUR, 3);
       src.filter(POSTERIZE, 3);
     }
