@@ -1,6 +1,6 @@
 void setup()
 {
-  size(200,200);
+  size(380, 582);
   background(125);
   fill(255);
   noLoop();
