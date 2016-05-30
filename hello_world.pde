@@ -17,6 +17,8 @@ void setup()
 void draw() {
   float sceneRatio = (float(frameCount) - 1) / 200;
   
+  focused = true;
+  
   xNoiseResolution = map(mouseX, 0, width, 0.05, 0);
   yNoiseResolution = map(mouseY, 0, height, 0.01, 0);
   
