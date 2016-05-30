@@ -6,6 +6,7 @@ float xNoiseResolution = 0.03;
 float yNoiseResolution = 0.005;
 boolean mouseHover = false;
 int countKeyPresses = 0;
+float warpFade = 1;
 
 void setup()
 {
@@ -20,17 +21,19 @@ void draw() {
   if (mouseHover) {
     xNoiseResolution = map(mouseX, 0, width, 0.05, 0);
     yNoiseResolution = map(mouseY, 0, height, 0.01, 0);
+    warpFade = 1;
   }
   else {
     xNoiseResolution = 0.9 * xNoiseResolution;
     yNoiseResolution = 0.9 * yNoiseResolution;
+    warpFade = 0.9 * warpFade;
   }
   
   loadPixels();
   for (int x = 0; x < width; x++) {
     for (int y = 0; y < height; y++) {
       int loc = x + y * width;
-      int mod = floor(warpSize * map(sin(map(noise(xNoiseResolution * x, yNoiseResolution * y), 0, 1, 0, 2 * PI) + 2 * PI * sceneRatio + map(y, 0, height, 0, 2 * PI)), -1, 1, 0, 1));
+      int mod = floor(warpSize * map(sin(map(noise(xNoiseResolution * x, yNoiseResolution * y), 0, 1, 0, warpFade * 2 * PI) + warpFade * 2 * PI * sceneRatio + warpFade * map(y, 0, height, 0, 2 * PI)), -1, 1, 0, 1));
       pixels[loc] = src.get(x + mod, y);
     }
   }
