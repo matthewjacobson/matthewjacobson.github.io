@@ -1,4 +1,4 @@
-/* @pjs preload="picture.jpg"; */
+/* @pjs preload="picture.jpg"; globalKeyEvents="true"; */
 
 PImage src;
 int warpSize = 50;
