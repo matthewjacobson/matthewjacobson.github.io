@@ -50,16 +50,18 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (keyCode == RIGHT || keyCode == LEFT) {
-    src = loadImage("picture.jpg");
-    src.resize(380 + warpSize, 582 + warpSize);
-    if (keyCode == RIGHT) countKeyPresses++;
-    if (keyCode == LEFT) countKeyPresses--;
-    if (countKeyPresses % 4 == 1) src.filter(BLUR, 3);
-    else if (countKeyPresses % 4 == 2) src.filter(POSTERIZE, 3);
-    else if (countKeyPresses % 4 == 3) {
-      src.filter(BLUR, 3);
-      src.filter(POSTERIZE, 3);
+  if (key == CODED) {
+    if (keyCode == RIGHT || keyCode == LEFT) {
+      src = loadImage("picture.jpg");
+      src.resize(380 + warpSize, 582 + warpSize);
+      if (keyCode == RIGHT) countKeyPresses++;
+      if (keyCode == LEFT) countKeyPresses--;
+      if (countKeyPresses % 4 == 1) src.filter(BLUR, 3);
+      else if (countKeyPresses % 4 == 2) src.filter(POSTERIZE, 3);
+      else if (countKeyPresses % 4 == 3) {
+        src.filter(BLUR, 3);
+        src.filter(POSTERIZE, 3);
+      }
     }
   }
 }
