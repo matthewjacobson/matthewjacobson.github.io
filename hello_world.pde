@@ -55,7 +55,8 @@ void keyPressed() {
       src = loadImage("picture.jpg");
       src.resize(380 + warpSize, 582 + warpSize);
       if (keyCode == RIGHT) countKeyPresses++;
-      if (keyCode == LEFT) countKeyPresses--;
+      else if (keyCode == LEFT) countKeyPresses--;
+      if (countKeyPresses < 0) countKeyPresses = countKeyPresses + 4;
       if (countKeyPresses % 4 == 1) src.filter(BLUR, 3);
       else if (countKeyPresses % 4 == 2) src.filter(POSTERIZE, 3);
       else if (countKeyPresses % 4 == 3) {
