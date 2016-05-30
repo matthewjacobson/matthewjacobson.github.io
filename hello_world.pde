@@ -39,7 +39,7 @@ void draw() {
   }
   updatePixels();
   
-  println(frameCount);
+  println(mouseHover);
 }
 
 void mouseOver() {
