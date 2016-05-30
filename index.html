@@ -4,6 +4,18 @@
 
 <html>
 <head>
+	<script type="text/javascript" src="processing.js"></script>
+	<script type="text/javascript">
+	function bindJavascript() {
+		canvaslist = document.getElementsByTagName("canvas");
+		for(c=0; c<canvaslist.length; c++) {
+			pjs = Processing.getInstanceById(canvaslist[c]);
+			try { pjs.bindJavascript(this); }
+			catch(e) { setTimeout(bindJavascript, 250); }
+		}
+	}
+	bindJavascript();
+	</script>
 	<title>Matt Jacobson</title>
 	<meta name = "viewport" content = "width = 740px">
 	<style>
@@ -56,9 +68,8 @@
 <table style="width:1000px;margin:0 auto;">
 <tr>
 <td width="400px">
-	<!-- <a target="_blank" href="http://en.wikipedia.org/wiki/Paul_Erd%C5%91s" target="_blank"><img src="picture.jpg" width="380px"/></a> -->
-	<script src="processing.js"></script> 
-	<canvas data-processing-sources="hello_world.pde"></canvas>
+	<canvas_id="first" data-processing-sources="hello_world.pde"></canvas>
+	<canvas_id="second" data-processing-sources="bypass.pde hello_world.pde"></canvas>
 </td>
 <td width="600px">
 
