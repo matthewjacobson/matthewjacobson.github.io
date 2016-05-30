@@ -1,14 +1,13 @@
+PImage src;
+
 void setup()
 {
   size(380, 582);
-  background(125);
-  fill(255);
-  noLoop();
-  PFont fontA = loadFont("courier");
-  textFont(fontA, 14);  
+  src = loadImage("image.jpg");
+  src.resize(380, 0);
 }
 
 void draw(){  
-  text("Hello Web!",20,20);
-  println("Hello ErrorLog!");
+  image(src, 0, 0);
+  println(mouseX, mouseY);
 }
