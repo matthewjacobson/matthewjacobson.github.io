@@ -4,7 +4,7 @@ void setup()
 {
   size(380, 582);
   src = loadImage("picture.jpg");
-  src.resize(380, 0);
+  src.resize(380, 582);
 }
 
 void draw(){  
