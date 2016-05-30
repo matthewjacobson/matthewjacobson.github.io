@@ -34,6 +34,7 @@ void draw() {
   else {
     image(src, 0, 0);
   }
+  println(countSpacePresses);
 }
 
 void mouseOver() {
@@ -59,6 +60,5 @@ void keyPressed() {
       src.filter(BLUR, 3);
       src.filter(POSTERIZE, 3);
     }
-    println(countSpacePresses);
   }
 }
