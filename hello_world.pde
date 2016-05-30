@@ -3,7 +3,7 @@ PImage src;
 void setup()
 {
   size(380, 582);
-  src = loadImage("image.jpg");
+  src = loadImage("picture.jpg");
   src.resize(380, 0);
 }
 
