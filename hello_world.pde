@@ -9,7 +9,7 @@ void setup()
 {
   size(380, 582);
   src = loadImage("picture.jpg");
-  src.resize(380, 582);
+  src.resize(380 + warpSize, 582 + warpSize);
 }
 
 void draw() {
