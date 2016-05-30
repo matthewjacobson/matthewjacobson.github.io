@@ -52,6 +52,8 @@ void mouseOut() {
 
 void mouseClicked() {
   link("https://en.wikipedia.org/wiki/Paul_Erd%C5%91s");
+  src = loadImage("picture.jpg");
+  src.resize(380 + warpSize, 582 + warpSize);
 }
 
 interface Javascript {}
