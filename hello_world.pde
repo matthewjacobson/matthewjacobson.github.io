@@ -1,8 +1,8 @@
 /* @pjs preload="picture.jpg"; */
 
 PImage src;
-int warpSize = 100;
-float xNoiseResolution = 0.01;
+int warpSize = 50;
+float xNoiseResolution = 0.03;
 float yNoiseResolution = 0.005;
 
 void setup()
