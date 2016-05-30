@@ -44,5 +44,5 @@ void mouseOut() {
 }
 
 void mouseClicked() {
-  link("https://en.wikipedia.org/wiki/Paul_Erd%C5%91s", "_new");
+  link("https://en.wikipedia.org/wiki/Paul_Erd%C5%91s");
 }
