@@ -38,8 +38,6 @@ void draw() {
     }
   }
   updatePixels();
-  
-  println(mouseHover);
 }
 
 void mouseOver() {
