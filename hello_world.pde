@@ -49,7 +49,7 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if ((key == ' ') {
+  if (key == ' ') {
     src = loadImage("picture.jpg");
     src.resize(380 + warpSize, 582 + warpSize);
     if (countSpacePresses % 4 == 1) src.filter(BLUR, 3);
