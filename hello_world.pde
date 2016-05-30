@@ -50,7 +50,7 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (key == ' ') {
+  if (key == " ") {
     countSpacePresses++;
     src = loadImage("picture.jpg");
     src.resize(380 + warpSize, 582 + warpSize);
