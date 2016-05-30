@@ -39,3 +39,9 @@ void mouseOver() {
 void mouseOut() {
   mouseHover = false;
 }
+
+void mousePressed() {
+  if(mouseHover) { 
+    link("https://en.wikipedia.org/wiki/Paul_Erd%C5%91s");
+  }
+}
