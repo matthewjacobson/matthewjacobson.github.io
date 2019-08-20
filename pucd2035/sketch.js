@@ -215,5 +215,5 @@ function windowResized() {
 }
 
 function mouseWheel(event) {
-	floodSize = Math.min(50, Math.max(500, floodSize + event.delta));
+	floodSize = Math.max(50, Math.min(500, floodSize + event.delta));
 }
