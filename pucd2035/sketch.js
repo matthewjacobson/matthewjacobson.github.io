@@ -5,6 +5,7 @@ let fontData;
 let boundingBox;
 let paths;
 let walls;
+let floodSize;
 
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
@@ -164,6 +165,7 @@ function setup() {
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
+	floodSize = 100;
 }
 
 function draw() {
@@ -189,12 +191,10 @@ function draw() {
 			let cast = getRayCast(ray);
 			flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
 		}
-
 		let angleLeft = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX) - 0.1;
 		let rayLeft = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angleLeft), dy: floodSize * Math.sin(angleLeft)};
 		let castLeft = getRayCast(rayLeft);
 		flood.push({angle: angleLeft, x: castLeft.intersection.x, y: castLeft.intersection.y});
-
 		let angleRight = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX) + 0.1;
 		let rayRight = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angleRight), dy: floodSize * Math.sin(angleRight)};
 		let castRight = getRayCast(rayRight);
@@ -212,4 +212,8 @@ function draw() {
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 	getWalls();
+}
+
+function mouseWheel(event) {
+	floodSize = Math.min(50, Math.max(500, floodSize + event.delta));
 }
