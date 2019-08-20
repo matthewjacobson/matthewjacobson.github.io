@@ -13,11 +13,11 @@ function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let steps = 20;
 	for (let i = 0; i <= steps; i++) {
 		let t = i / steps;
-		console.log(t);
 		let x = bezierPoint(x1, x2, x3, x4, t);
 		let y = bezierPoint(y1, y2, y3, y4, t);
 		output.push({x: x, y: y});
 	}
+	console.log(output);
 	return output;
 }
 
