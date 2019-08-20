@@ -8,7 +8,7 @@ let paths;
 
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
-	let steps = 20;
+	let steps = 10;
 	let xMin = x1;
 	let xMax = x1;
 	let yMin = y1;
@@ -115,7 +115,7 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	font = opentype.parse(fontData.bytes.buffer);
-	let outline = getPathOutline(font.getPath(string, 0, 0, 72).commands);
+	let outline = getPathOutline(font.getPath(string, 0, 0, 300).commands);
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 }
