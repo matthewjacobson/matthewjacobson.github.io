@@ -27,29 +27,22 @@ function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 }
 
 function getPathOutline(cmds) {
-
 	// output to store the paths
 	let output = [];
-
 	// current pen position
 	let cx = 0;
 	let cy = 0;
-
 	// start position of current contour
 	let startX = 0;
 	let startY = 0;
-
 	// store the bounding box
 	let xMin = cmds[0].x;
 	let xMax = cmds[0].x;
 	let yMin = cmds[0].y;
 	let yMax = cmds[0].y;
-
 	// store the current path
 	let currPath = [];
-
 	for (let cmd of cmds) {
-
 		switch (cmd.type) {
 			case 'M': // move to
 				startX = cmd.x;
@@ -101,11 +94,8 @@ function getPathOutline(cmds) {
 				output.push(currPath);
 				break;
 		}
-
 	}
-
 	return {paths: output, xMin: xMin, xMax: xMax, yMin: yMin, yMax: yMax};
-
 }
 
 function preload() {
@@ -121,24 +111,23 @@ function setup() {
 }
 
 function draw() {
-
 	background(51);
-
-	noStroke();
-
+	noFill();
+	stroke(255);
 	translate(windowWidth / 2, windowHeight / 2);
-
 	push();
 		let xOffset = boundingBox.x + boundingBox.w / 2;
 		let yOffset = boundingBox.y + boundingBox.h / 2;
 		let padding = 0.8;
 		let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
 		for (let i = 0; i < paths.length; i++) {
-			for (let j = 0; j < paths[i].length; j++) {
-				let x = scale * (paths[i][j].x - xOffset);
-				let y = scale * (paths[i][j].y - yOffset);
-				ellipse(x, y, 2, 2);
-			}
+			beginShape();
+				for (let j = 0; j < paths[i].length; j++) {
+					let x = scale * (paths[i][j].x - xOffset);
+					let y = scale * (paths[i][j].y - yOffset);
+					vertex(x, y);
+				}
+			endShape();
 		}
 	pop();
 
