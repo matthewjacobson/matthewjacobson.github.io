@@ -176,7 +176,7 @@ function draw() {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
 	let flood = [];
-	let floodSize = 500;
+	let floodSize = 100;
 	for (let i = 0; i < 20; i++) {
 		let angle = 2 * Math.PI * i / 20 - Math.PI;
 		let ray = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
@@ -195,6 +195,7 @@ function draw() {
 	flood.sort((a, b) => a.angle - b.angle);
 	beginShape();
 		for (let i = 0; i < flood.length; i++) {
+			line(mouseX, mouseY, flood[i].x, flood[i].y);
 			vertex(flood[i].x, flood[i].y);
 		}
 	endShape(CLOSE);
