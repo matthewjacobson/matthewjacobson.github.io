@@ -3,21 +3,22 @@ function preload() {
 	font = loadFont('assets/font.otf');
 }
 
-let points;
-let bounds;
+let string = 'hello';
+let outline;
+let boundingBox;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	points = font.textToPoints('p5', 0, 0, 10, {sampleFactor: 5, simplifyThreshold: 0});
-	bounds = font.textBounds(' p5 ', 0, 0, 10);
+	outline = font.textToPoints(string, 0, 0, 10, {sampleFactor: 5, simplifyThreshold: 0});
+	boundingBox = font.textBounds(string, 0, 0, 10);
 }
 
 function draw() {
 	background(51);
 	beginShape();
-		translate(-bounds.x * width / bounds.w, -bounds.y * height / bounds.h);
+		translate(-boundingBox.x * width / boundingBox.w, -boundingBox.y * height / boundingBox.h);
 		for (let i = 0; i < points.length; i++) {
 			let p = points[i];
-			vertex(p.x * width / bounds.w + sin(20 * p.y / bounds.h + millis() / 1000) * width / 30, p.y * height / bounds.h);
+			vertex(p.x * width / bounds.w, p.y * height / bounds.h);
 		}
 	endShape(CLOSE);
 }
