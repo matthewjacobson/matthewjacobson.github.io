@@ -133,24 +133,24 @@ function draw() {
 	background(0);
 	noFill();
 	stroke(255);
-	for (let i = 0; i < walls.length; i++) {
-		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
-	}
-	// push();
-	// 	let xOffset = boundingBox.x + boundingBox.w / 2 - windowWidth / 2;
-	// 	let yOffset = boundingBox.y + boundingBox.h / 2 - windowHeight / 2;
-	// 	let padding = 0.8;
-	// 	let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
-	// 	for (let i = 0; i < paths.length; i++) {
-	// 		beginShape();
-	// 			for (let j = 0; j < paths[i].length; j++) {
-	// 				let x = scale * (paths[i][j].x - xOffset);
-	// 				let y = scale * (paths[i][j].y - yOffset);
-	// 				vertex(x, y);
-	// 			}
-	// 		endShape();
-	// 	}
-	// pop();
+	// for (let i = 0; i < walls.length; i++) {
+	// 	line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
+	// }
+	push();
+		let xOffset = boundingBox.x + boundingBox.w / 2 - windowWidth / 2;
+		let yOffset = boundingBox.y + boundingBox.h / 2 - windowHeight / 2;
+		let padding = 0.8;
+		let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
+		for (let i = 0; i < paths.length; i++) {
+			beginShape();
+				for (let j = 0; j < paths[i].length; j++) {
+					let x = scale * (paths[i][j].x - xOffset);
+					let y = scale * (paths[i][j].y - yOffset);
+					vertex(x, y);
+				}
+			endShape();
+		}
+	pop();
 }
 
 function windowResized() {
