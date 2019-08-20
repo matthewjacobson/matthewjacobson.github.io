@@ -120,6 +120,39 @@ function getWalls() {
 	}
 }
 
+function lineLineIntersection(l1, l2) {
+	let den = (l1.x1 - l1.x2) * (l2.y1 - l2.y2) - (l1.y1 - l1.y2) * (l2.x1 - l2.x2);
+	if (den == 0) {
+		return {bIntersect: false};
+	}
+	let t = ((l1.x1 - l2.x1) * (l2.y1 - l2.y2) - (l1.y1 - l2.y1) * (l2.x1 - l2.x2)) / den;
+	let u = -((l1.x1 - l1.x2) * (l1.y1 - l2.y1) - (l1.y1 - l1.y2) * (l1.x1 - l2.x1)) / den;
+	if (t > 0 && t < 1 && u > 0) {
+    	return {bIntersect: true, x: x1 + t * (x2 - x1), y: y1 + t * (y2 - y1)};
+    } else {
+    	return {bIntersect: false};
+    }
+}
+
+function getRayCast(ray) {
+	let hit = false;
+	let intersect = {x: ray.x + ray.dx, y: ray.y + ray.dy};
+	let rayLine = {x1: ray.x, y1: ray.y, x2: ray.x + ray.dx, y2: ray.y + ray.dy};
+	let minDist = dist(ray.x, ray.y, ray.x + ray.dx, ray.y + ray.dy);
+	for (let i = 0; i < walls.length; i++) {
+		let checkIntersect = lineLineIntersection(rayLine, walls[i]);
+		if (checkIntersect.bIntersect) {
+			hit = true;
+			let currDist = dist(ray.x, ray.y, checkIntersect.x, checkIntersect.y);
+			if (currDist < minDist) {
+				minDist = currDist;
+				intersect = {x: checkIntersect.x, y: checkIntersect: y};
+			}
+		}
+	}
+	return {bHit: hit, intersection: intersect};
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	font = opentype.parse(fontData.bytes.buffer);
@@ -136,10 +169,14 @@ function draw() {
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
-	for (let i = 0; i < 20; i++) {
-		let angle = 2 * Math.PI * i / 20;
-		line(mouseX, mouseY, mouseX + 50 * Math.cos(angle), mouseY + 50 * Math.sin(angle));
-	}
+	beginShape();
+		for (let i = 0; i < 20; i++) {
+			let angle = 2 * Math.PI * i / 20;
+			let ray = {x: mouseX, y: mouseY, dx: 50 * Math.cos(angle), dy: 50 * Math.sin(angle)};
+			let cast = getRayCast(ray);
+			vertex(cast.intersection.x, cast.intersection.y);
+		}
+	endShape(CLOSE);
 }
 
 function windowResized() {
