@@ -1,5 +1,5 @@
 
-let string = 'hello';
+let string = 'L';
 
 let font;
 let fontData;
