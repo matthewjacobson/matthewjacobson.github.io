@@ -43,12 +43,7 @@ function getPathOutline(cmds) {
 				startY = cmd.y;
 				cx = cmd.x;
 				cy = cmd.y;
-				if (currPath.length > 0) {
-					output.push(currPath);
-				}
 				currPath = [{x: cx, y: cy}];
-				console.log(currPath);
-				console.log("break");
 				break;
 			case 'L': // line to
 				line(cx, cy, cmd.x, cmd.y);
@@ -74,6 +69,7 @@ function getPathOutline(cmds) {
 			case 'Z': // close
 				line(cx, cy, startX, startY);
 				currPath.push({x: startX, y: startY});
+				output.push(currPath);
 				break;
 		}
 
