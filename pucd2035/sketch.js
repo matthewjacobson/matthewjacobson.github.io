@@ -18,7 +18,7 @@ function draw() {
 		translate(-boundingBox.x * width / boundingBox.w, -boundingBox.y * height / boundingBox.h);
 		for (let i = 0; i < outline.length; i++) {
 			let p = outline[i];
-			vertex(p.x * width / bounds.w, p.y * height / bounds.h);
+			vertex(p.x * width / boundingBox.w, p.y * height / boundingBox.h);
 		}
 	endShape(CLOSE);
 }
