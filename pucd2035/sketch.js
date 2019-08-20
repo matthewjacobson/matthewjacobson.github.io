@@ -121,25 +121,22 @@ function getWalls() {
 }
 
 function lineLineIntersection(l1, l2) {
-	let x1 = l1.x1;
-	let y1 = l1.y1;
-	let x2 = l1.x2;
-	let y2 = l1.y2;
-	let x3 = l2.x1;
-	let y3 = l2.y1;
-	let x4 = l2.x2;
-	let y4 = l2.y2;
-	let den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-    if (den == 0) {
+	let diffLA = {x: l1.x2 - l1.x1, y: l1.y2 - l1.y1};
+	let diffLB = {x: l2.x2 - l2.x1, y: l2.y2 - l2.y1};
+	let compareA = diffLA.x * l1.y1 - diffLA.y * l1.x1;
+	let compareB = diffLB.x * l2.y1 - diffLB.y * l2.x1;
+	let check1 = (diffLA.x * l2.y1 - diffLA.y * l1.x1) < compareA;
+	let check2 = (diffLA.x * l2.y2 - diffLA.y * l2.x2) < compareA;
+	let check3 = (diffLB.x * l2.y1 - diffLB.y * l1.x1) < compareB;
+	let check4 = (diffLB.x * l1.y2 - diffLB.y * l1.x2) < compareB;
+	if ((check1 ^ check2) && (check3 ^ check4)) {
+		let lDetDivInv = 1 / ((diffLA.x * diffLB.y) - (diffLA.y * diffLB.x));
+		let x = -((diffLA.x * compareB) - (compareA * diffLB.x)) * lDetDivInv;
+		let y = -((diffLA.y * compareB) - (compareA * diffLB.y)) * lDetDivInv;
+		return {bIntersect: true, x: x, y: y};
+	} else {
 		return {bIntersect: false};
 	}
-	let t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
-    let u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den;
-    if (t > 0 && t < 1 && u > 0) {
-    	return {bIntersect: true, x: x1 + t * (x2 - x1), y: y1 + t * (y2 - y1)};
-    } else {
-    	return {bIntersect: false};
-    }
 }
 
 function getRayCast(ray) {
