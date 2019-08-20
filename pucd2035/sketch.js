@@ -146,7 +146,7 @@ function getRayCast(ray) {
 			let currDist = dist(ray.x, ray.y, checkIntersect.x, checkIntersect.y);
 			if (currDist < minDist) {
 				minDist = currDist;
-				intersect = {x: checkIntersect.x, y: checkIntersect: y};
+				intersect = {x: checkIntersect.x, y: checkIntersect.y};
 			}
 		}
 	}
