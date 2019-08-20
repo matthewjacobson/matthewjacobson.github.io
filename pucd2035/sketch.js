@@ -1,5 +1,5 @@
 
-let string = 'L';
+let string = 'hello';
 
 let font;
 let fontData;
@@ -203,12 +203,25 @@ function draw() {
 		flood.push({angle: angleRight, x: castRight.intersection.x, y: castRight.intersection.y});
 	}
 	flood.sort((a, b) => a.angle - b.angle);
-	beginShape();
-		for (let i = 0; i < flood.length; i++) {
-			line(mouseX, mouseY, flood[i].x, flood[i].y);
+
+	// beginShape();
+	// 	for (let i = 0; i < flood.length; i++) {
+	// 		line(mouseX, mouseY, flood[i].x, flood[i].y);
+	// 		vertex(flood[i].x, flood[i].y);
+	// 	}
+	// endShape(CLOSE);
+
+	for (let i = 0; i < flood.length; i++) {
+		beginShape();
+			fill(255);
+			vertex(mouseX, mouseY);
+			fill(0);
 			vertex(flood[i].x, flood[i].y);
-		}
-	endShape(CLOSE);
+			fill(0);
+			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+		endShape();
+
+	}
 }
 
 function windowResized() {
