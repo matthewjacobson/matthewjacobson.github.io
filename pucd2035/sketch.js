@@ -144,6 +144,8 @@ function setup() {
 function draw() {
 	background(51);
 
+	scale (2, 2);
+
 	push();
 		translate(50, 125);
 		path.draw(drawingContext); // opentype.js
