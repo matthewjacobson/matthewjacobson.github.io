@@ -17,7 +17,6 @@ function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 		let y = bezierPoint(y1, y2, y3, y4, t);
 		output.push({x: x, y: y});
 	}
-	console.log(output);
 	return output;
 }
 
@@ -55,7 +54,7 @@ function getPathOutline(cmds) {
 				break;
 			case 'C': // curve to
 				bezier(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
-				currPath.concat(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y));
+				currPath = currPath.concat(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y));
 				cx = cmd.x;
 				cy = cmd.y;
 				break;
@@ -64,7 +63,7 @@ function getPathOutline(cmds) {
 				vertex(cx, cy);
 				quadraticVertex(cmd.x1, cmd.y1, cmd.x, cmd.y);
 				endShape();
-				currPath.concat(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x1, cmd.y1, cmd.x, cmd.y));
+				currPath = currPath.concat(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x1, cmd.y1, cmd.x, cmd.y));
 				cx = cmd.x;
 				cy = cmd.y;
 				break;
