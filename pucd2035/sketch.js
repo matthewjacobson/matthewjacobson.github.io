@@ -103,15 +103,6 @@ function preload() {
 	fontData = loadBytes('assets/font.ttf');
 }
 
-function setup() {
-	createCanvas(windowWidth, windowHeight);
-	font = opentype.parse(fontData.bytes.buffer);
-	let outline = getPathOutline(font.getPath(string, 0, 0, 72).commands);
-	paths = outline.paths;
-	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
-	getWalls();
-}
-
 function getWalls() {
 	walls = [];
 	let xOffset = boundingBox.x + boundingBox.w / 2 - windowWidth / 2;
@@ -127,6 +118,15 @@ function getWalls() {
 			walls.push({x1: x1, y1: y1, x2: x2, y2: y2});
 		}
 	}
+}
+
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	font = opentype.parse(fontData.bytes.buffer);
+	let outline = getPathOutline(font.getPath(string, 0, 0, 72).commands);
+	paths = outline.paths;
+	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
+	getWalls();
 }
 
 function draw() {
