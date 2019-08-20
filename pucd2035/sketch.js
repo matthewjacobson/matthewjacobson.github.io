@@ -7,6 +7,47 @@ let outline;
 let boundingBox;
 let path;
 
+function drawPathOutline(cmds) {
+  // current pen position
+  let cx = 0;
+  let cy = 0;
+  // start position of current contour
+  let startX = 0;
+  let startY = 0;
+  for (let cmd of cmds) {
+    switch (cmd.type) {
+      case 'M':
+        startX = cmd.x;
+        startY = cmd.y;
+        cx = cmd.x;
+        cy = cmd.y;
+        break;
+      case 'L':
+        line(cx, cy, cmd.x, cmd.y);
+        cx = cmd.x;
+        cy = cmd.y;
+        break;
+      case 'C':
+        bezier(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
+        cx = cmd.x;
+        cy = cmd.y;
+        break;
+      case 'Q':
+        beginShape();
+        vertex(cx, cy);
+        quadraticVertex(cmd.x1, cmd.y1, cmd.x, cmd.y);
+        endShape();
+        cx = cmd.x;
+        cy = cmd.y;
+        break;
+      case 'Z':
+        // to complete path
+        line(cx, cy, startX, startY);
+        break;
+		}
+  }
+}
+
 function preload() {
 	fontData = loadBytes('assets/font.otf');
 }
@@ -29,6 +70,13 @@ function draw() {
 	push();
 		translate(50, 125);
 		path.draw(drawingContext); // opentype.js
+	pop();
+	push();
+		noFill();
+		stroke(0);
+		strokeWeight(2);
+		translate(50, 225);
+		drawPathOutline(path.commands); // p5js
 	pop();
 	// beginShape();
 	// 	translate(-boundingBox.x * width / boundingBox.w, -boundingBox.y * height / boundingBox.h);
