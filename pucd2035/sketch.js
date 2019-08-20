@@ -147,17 +147,18 @@ function getRayCast(ray) {
 	let intersect = {x: ray.x + ray.dx, y: ray.y + ray.dy};
 	let rayLine = {x1: ray.x, y1: ray.y, x2: ray.x + ray.dx, y2: ray.y + ray.dy};
 	let minDist = dist(ray.x, ray.y, ray.x + ray.dx, ray.y + ray.dy);
-	// for (let i = 0; i < walls.length; i++) {
-	// 	let checkIntersect = lineLineIntersection(rayLine, walls[i]);
-	// 	if (checkIntersect.bIntersect) {
-	// 		hit = true;
-	// 		let currDist = dist(ray.x, ray.y, checkIntersect.x, checkIntersect.y);
-	// 		if (currDist < minDist) {
-	// 			minDist = currDist;
-	// 			intersect = {x: checkIntersect.x, y: checkIntersect.y};
-	// 		}
-	// 	}
-	// }
+	for (let i = 0; i < walls.length; i++) {
+		let checkIntersect = lineLineIntersection(rayLine, walls[i]);
+		if (checkIntersect.bIntersect) {
+			ellipse(checkIntersect.x, checkIntersect.y, 2, 2);
+			hit = true;
+			let currDist = dist(ray.x, ray.y, checkIntersect.x, checkIntersect.y);
+			if (currDist < minDist) {
+				minDist = currDist;
+				intersect = {x: checkIntersect.x, y: checkIntersect.y};
+			}
+		}
+	}
 	return {bHit: hit, intersection: intersect};
 }
 
