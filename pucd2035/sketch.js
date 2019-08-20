@@ -180,7 +180,7 @@ function draw() {
 	beginShape();
 		for (let i = 0; i < 20; i++) {
 			let angle = 2 * Math.PI * i / 20;
-			let ray = {x: mouseX, y: mouseY, dx: 50 * Math.cos(angle), dy: 50 * Math.sin(angle)};
+			let ray = {x: mouseX, y: mouseY, dx: 500 * Math.cos(angle), dy: 500 * Math.sin(angle)};
 			let cast = getRayCast(ray);
 			vertex(cast.intersection.x, cast.intersection.y);
 		}
