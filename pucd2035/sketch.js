@@ -129,11 +129,15 @@ function draw() {
 	translate(windowWidth / 2, windowHeight / 2);
 
 	push();
-		scale(2, 2);
-		translate(-boundingBox.x - boundingBox.w / 2, -boundingBox.y - boundingBox.h / 2);
+		let xOffset = boundingBox.x + boundingBox.w / 2;
+		let yOffset = boundingBox.y + boundingBox.h / 2;
+		let padding = 0.8;
+		let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
 		for (let i = 0; i < paths.length; i++) {
 			for (let j = 0; j < paths[i].length; j++) {
-				ellipse(paths[i][j].x, paths[i][j].y, 5, 5);
+				let x = scale * (paths[i][j].x - xOffset);
+				let y = scale * (paths[i][j].y - yOffset);
+				ellipse(x, y, 2, 2);
 			}
 		}
 	pop();
