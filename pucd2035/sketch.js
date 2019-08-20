@@ -156,11 +156,14 @@ function draw() {
 		drawPathOutline(path.commands); // p5js
 	pop();
 
-	for (let i = 0; i < test.length; i++) {
-		for (let j = 0; j < test[i].length; j++) {
-			ellipse(test[i][j].x, test[i][j].y, 5, 5);
+	push();
+		translate(50, 400);
+		for (let i = 0; i < test.length; i++) {
+			for (let j = 0; j < test[i].length; j++) {
+				ellipse(test[i][j].x, test[i][j].y, 5, 5);
+			}
 		}
-	}
+	pop();
 
 	// beginShape();
 	// 	translate(-boundingBox.x * width / boundingBox.w, -boundingBox.y * height / boundingBox.h);
