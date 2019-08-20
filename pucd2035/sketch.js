@@ -170,8 +170,7 @@ function setup() {
 
 function draw() {
 	background(0);
-	noFill();
-	stroke(255);
+	noStroke();
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
@@ -220,7 +219,6 @@ function draw() {
 			fill(0);
 			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
 		endShape();
-
 	}
 }
 
