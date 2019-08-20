@@ -175,13 +175,27 @@ function draw() {
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
-	beginShape();
-		for (let i = 0; i < 20; i++) {
-			let angle = 2 * Math.PI * i / 20;
-			let ray = {x: mouseX, y: mouseY, dx: 500 * Math.cos(angle), dy: 500 * Math.sin(angle)};
+	let flood = [];
+	let floodSize = 500;
+	for (let i = 0; i < 20; i++) {
+		let angle = 2 * Math.PI * i / 20 - Math.PI;
+		let ray = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
+		let cast = getRayCast(ray);
+		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+	}
+	for (let i = 0; i < walls.length; i++) {
+		let angle = Math.atan2(walls[i].y1, walls[i].x1);
+		let distance = dist(mouseX, mouseY, walls[i].y1, walls[i].x1);
+		if (distance < floodSize) {
+			let ray = {x: mouseX, y: mouseY, dx: distance * Math.cos(angle), dy: distance * Math.sin(angle)};
 			let cast = getRayCast(ray);
-			line(ray.x, ray.y, cast.intersection.x, cast.intersection.y);
-			vertex(cast.intersection.x, cast.intersection.y);
+			flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+		}
+	}
+	flood.sort((a, b) => a.angle - b.angle);
+	beginShape();
+		for (let i = 0; i < flood.length(); i++) {
+			vertex(flood[i].x, flood[i].y);
 		}
 	endShape(CLOSE);
 }
