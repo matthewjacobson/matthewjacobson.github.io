@@ -127,6 +127,12 @@ function setup() {
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
+
+	for (let i = 0; i < 20; i++) {
+		let angle = 2 * Math.PI * i / 20;
+		line(mouseX, mouseY, mouseX + 50 * Math.cos(angle), mouseY + 50 * Math.sin(angle));
+	}
+	
 }
 
 function draw() {
@@ -136,21 +142,6 @@ function draw() {
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
-	// push();
-	// 	let xOffset = boundingBox.x + boundingBox.w / 2 - windowWidth / 2;
-	// 	let yOffset = boundingBox.y + boundingBox.h / 2 - windowHeight / 2;
-	// 	let padding = 0.8;
-	// 	let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
-	// 	for (let i = 0; i < paths.length; i++) {
-	// 		beginShape();
-	// 			for (let j = 0; j < paths[i].length; j++) {
-	// 				let x = scale * (paths[i][j].x - xOffset);
-	// 				let y = scale * (paths[i][j].y - yOffset);
-	// 				vertex(x, y);
-	// 			}
-	// 		endShape();
-	// 	}
-	// pop();
 }
 
 function windowResized() {
