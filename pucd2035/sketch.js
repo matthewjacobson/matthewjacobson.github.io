@@ -5,6 +5,7 @@ let font;
 let fontData;
 let boundingBox;
 let paths;
+let walls;
 
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
@@ -98,6 +99,23 @@ function getPathOutline(cmds) {
 	return {paths: output, xMin: xMin, xMax: xMax, yMin: yMin, yMax: yMax};
 }
 
+function getWalls() {
+	walls = [];
+	let xOffset = boundingBox.x + boundingBox.w / 2 - windowWidth / 2;
+	let yOffset = boundingBox.y + boundingBox.h / 2 - windowHeight / 2;
+	let padding = 0.8;
+	let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
+	for (let i = 0; i < paths.length; i++) {
+		for (let j = 0; j < paths[i].length - 1; j++) {
+			let x1 = scale * (paths[i][j].x - xOffset);
+			let y1 = scale * (paths[i][j].y - yOffset);
+			let x2 = scale * (paths[i][j + 1].x - xOffset);
+			let y2 = scale * (paths[i][j + 1].y - yOffset);
+			walls.push({x1: x1, y1: y1, x2: x2, y2: y2});
+		}
+	}
+}
+
 function preload() {
 	fontData = loadBytes('assets/font.ttf');
 }
@@ -108,31 +126,34 @@ function setup() {
 	let outline = getPathOutline(font.getPath(string, 0, 0, 300).commands);
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
+	getWalls();
 }
 
 function draw() {
-	background(51);
+	background(0);
 	noFill();
 	stroke(255);
-	translate(windowWidth / 2, windowHeight / 2);
-	push();
-		let xOffset = boundingBox.x + boundingBox.w / 2;
-		let yOffset = boundingBox.y + boundingBox.h / 2;
-		let padding = 0.8;
-		let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
-		for (let i = 0; i < paths.length; i++) {
-			beginShape();
-				for (let j = 0; j < paths[i].length; j++) {
-					let x = scale * (paths[i][j].x - xOffset);
-					let y = scale * (paths[i][j].y - yOffset);
-					vertex(x, y);
-				}
-			endShape();
-		}
-	pop();
-
+	for (let i = 0; i < walls.length; i++) {
+		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
+	}
+	// push();
+	// 	let xOffset = boundingBox.x + boundingBox.w / 2 - windowWidth / 2;
+	// 	let yOffset = boundingBox.y + boundingBox.h / 2 - windowHeight / 2;
+	// 	let padding = 0.8;
+	// 	let scale = Math.min(padding * windowWidth / boundingBox.w, padding * windowHeight / boundingBox.h);
+	// 	for (let i = 0; i < paths.length; i++) {
+	// 		beginShape();
+	// 			for (let j = 0; j < paths[i].length; j++) {
+	// 				let x = scale * (paths[i][j].x - xOffset);
+	// 				let y = scale * (paths[i][j].y - yOffset);
+	// 				vertex(x, y);
+	// 			}
+	// 		endShape();
+	// 	}
+	// pop();
 }
 
 function windowResized() {
-   resizeCanvas(windowWidth, windowHeight);
+	resizeCanvas(windowWidth, windowHeight);
+	getWalls();
 }
