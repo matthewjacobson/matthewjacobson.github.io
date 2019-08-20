@@ -16,8 +16,8 @@ function draw() {
 	background(51);
 	beginShape();
 		translate(-boundingBox.x * width / boundingBox.w, -boundingBox.y * height / boundingBox.h);
-		for (let i = 0; i < points.length; i++) {
-			let p = points[i];
+		for (let i = 0; i < outline.length; i++) {
+			let p = outline[i];
 			vertex(p.x * width / bounds.w, p.y * height / bounds.h);
 		}
 	endShape(CLOSE);
