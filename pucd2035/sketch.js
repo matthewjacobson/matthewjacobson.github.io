@@ -121,14 +121,22 @@ function getWalls() {
 }
 
 function lineLineIntersection(l1, l2) {
-	let den = (l1.x1 - l1.x2) * (l2.y1 - l2.y2) - (l1.y1 - l1.y2) * (l2.x1 - l2.x2);
-	if (den == 0) {
+	let x1 = l1.x1;
+	let y1 = l1.y1;
+	let x2 = l1.x2;
+	let y2 = l1.y2;
+	let x3 = l2.x1;
+	let y3 = l2.y1;
+	let x4 = l2.x2;
+	let y4 = l2.y2;
+	let den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+    if (den == 0) {
 		return {bIntersect: false};
 	}
-	let t = ((l1.x1 - l2.x1) * (l2.y1 - l2.y2) - (l1.y1 - l2.y1) * (l2.x1 - l2.x2)) / den;
-	let u = -((l1.x1 - l1.x2) * (l1.y1 - l2.y1) - (l1.y1 - l1.y2) * (l1.x1 - l2.x1)) / den;
-	if (t > 0 && t < 1 && u > 0) {
-    	return {bIntersect: true, x: l1.x1 + t * (l1.x2 - l1.x1), y: l1.y1 + t * (l1.y2 - l1.y1)};
+	let t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
+    let u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den;
+    if (t > 0 && t < 1 && u > 0) {
+    	return {bIntersect: true, x: x1 + t * (x2 - x1), y: y1 + t * (y2 - y1)};
     } else {
     	return {bIntersect: false};
     }
