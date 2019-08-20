@@ -1,4 +1,3 @@
-
 let string = 'hello';
 
 let font;
@@ -171,6 +170,7 @@ function setup() {
 function draw() {
 	background(0);
 	noStroke();
+	fill(255);
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
@@ -212,11 +212,8 @@ function draw() {
 
 	for (let i = 0; i < flood.length; i++) {
 		beginShape();
-			fill(255);
 			vertex(mouseX, mouseY);
-			fill(0);
 			vertex(flood[i].x, flood[i].y);
-			fill(0);
 			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
 		endShape();
 	}
