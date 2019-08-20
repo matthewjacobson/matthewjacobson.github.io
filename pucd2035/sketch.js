@@ -58,7 +58,7 @@ function getPathOutline(cmds) {
 				break;
 			case 'C': // curve to
 				bezier(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
-				currPath.push(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y));
+				currPath.concat(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y));
 				cx = cmd.x;
 				cy = cmd.y;
 				break;
@@ -67,7 +67,7 @@ function getPathOutline(cmds) {
 				vertex(cx, cy);
 				quadraticVertex(cmd.x1, cmd.y1, cmd.x, cmd.y);
 				endShape();
-				currPath.push(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x1, cmd.y1, cmd.x, cmd.y));
+				currPath.concat(getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x1, cmd.y1, cmd.x, cmd.y));
 				cx = cmd.x;
 				cy = cmd.y;
 				break;
