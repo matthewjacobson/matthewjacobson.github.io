@@ -182,6 +182,7 @@ function draw() {
 			let angle = 2 * Math.PI * i / 20;
 			let ray = {x: mouseX, y: mouseY, dx: 500 * Math.cos(angle), dy: 500 * Math.sin(angle)};
 			let cast = getRayCast(ray);
+			line(ray.x, ray.y, cast.intersection.x, cast.intersection.y);
 			vertex(cast.intersection.x, cast.intersection.y);
 		}
 	endShape(CLOSE);
