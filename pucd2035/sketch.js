@@ -128,7 +128,7 @@ function lineLineIntersection(l1, l2) {
 	let t = ((l1.x1 - l2.x1) * (l2.y1 - l2.y2) - (l1.y1 - l2.y1) * (l2.x1 - l2.x2)) / den;
 	let u = -((l1.x1 - l1.x2) * (l1.y1 - l2.y1) - (l1.y1 - l1.y2) * (l1.x1 - l2.x1)) / den;
 	if (t > 0 && t < 1 && u > 0) {
-    	return {bIntersect: true, x: x1 + t * (x2 - x1), y: y1 + t * (y2 - y1)};
+    	return {bIntersect: true, x: l1.x1 + t * (l1.x2 - l1.x1), y: l1.y1 + t * (l1.y2 - l1.y1)};
     } else {
     	return {bIntersect: false};
     }
