@@ -49,7 +49,7 @@ function drawPathOutline(cmds) {
 }
 
 function preload() {
-	fontData = loadBytes('assets/font.otf');
+	fontData = loadBytes('assets/font.ttf');
 }
 
 function setup() {
