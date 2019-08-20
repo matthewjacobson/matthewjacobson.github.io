@@ -43,7 +43,7 @@ function getPathOutline(cmds) {
 				startY = cmd.y;
 				cx = cmd.x;
 				cy = cmd.y;
-				if (output.length > 0) {
+				if (currPath.length > 0) {
 					output.push(currPath);
 				}
 				currPath = [{x: cx, y: cy}];
