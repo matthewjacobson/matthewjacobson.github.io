@@ -6,6 +6,7 @@ let fontData;
 let outline;
 let boundingBox;
 let path;
+let test;
 
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
@@ -132,6 +133,7 @@ function setup() {
 	console.log(path.commands);
 	console.log(getPathOutline(path.commands));
 
+	test = getPathOutline(path.commands);
 	// var currWidth = 0;
 	// for (var i = 0; i < string.length; i++) {
 	// 	outline = font.textToPoints(string.charAt(i), 0, 0, 10, {sampleFactor: 5, simplifyThreshold: 0});
@@ -141,6 +143,7 @@ function setup() {
 
 function draw() {
 	background(51);
+
 	push();
 		translate(50, 125);
 		path.draw(drawingContext); // opentype.js
@@ -152,6 +155,13 @@ function draw() {
 		translate(50, 225);
 		drawPathOutline(path.commands); // p5js
 	pop();
+
+	for (let i = 0; i < test.length; i++) {
+		for (let j = 0; j < test[i].length; j++) {
+			ellipse(test[i][j].x, test[i][j].y, 5, 5);
+		}
+	}
+
 	// beginShape();
 	// 	translate(-boundingBox.x * width / boundingBox.w, -boundingBox.y * height / boundingBox.h);
 	// 	for (let i = 0; i < outline.length; i++) {
