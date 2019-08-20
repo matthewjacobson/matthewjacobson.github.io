@@ -184,10 +184,12 @@ function draw() {
 		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
 	}
 	for (let i = 0; i < walls.length; i++) {
-		let angle = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX);
-		let ray = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
-		let cast = getRayCast(ray);
-		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+		for (let da = -0.1; da <= 0.1; da += 0.1) {
+			let angle = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX) + da;
+			let ray = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
+			let cast = getRayCast(ray);
+			flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+		}
 	}
 	flood.sort((a, b) => a.angle - b.angle);
 	beginShape();
