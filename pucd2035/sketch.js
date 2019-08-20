@@ -131,6 +131,7 @@ function setup() {
 	font = opentype.parse(fontData.bytes.buffer);
 	path = font.getPath(string, 0, 0, 72);
 
+	console.log(path.commands);
 	console.log(getPathOutline(path.commands));
 
 	// var currWidth = 0;
