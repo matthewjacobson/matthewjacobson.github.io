@@ -186,9 +186,11 @@ function draw() {
 	for (let i = 0; i < walls.length; i++) {
 		let angle = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX);
 		let distance = dist(mouseX, mouseY, walls[i].x1, walls[i].y1);
-		let ray = {x: mouseX, y: mouseY, dx: distance * Math.cos(angle), dy: distance * Math.sin(angle)};
-		let cast = getRayCast(ray);
-		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+		if (distance < floodSize) {
+			let ray = {x: mouseX, y: mouseY, dx: distance * Math.cos(angle), dy: distance * Math.sin(angle)};
+			let cast = getRayCast(ray);
+			flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+		}
 
 		let angleLeft = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX) - 0.1;
 		let rayLeft = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angleLeft), dy: floodSize * Math.sin(angleLeft)};
