@@ -127,12 +127,6 @@ function setup() {
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
-
-	for (let i = 0; i < 20; i++) {
-		let angle = 2 * Math.PI * i / 20;
-		line(mouseX, mouseY, mouseX + 50 * Math.cos(angle), mouseY + 50 * Math.sin(angle));
-	}
-	
 }
 
 function draw() {
@@ -141,6 +135,10 @@ function draw() {
 	stroke(255);
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
+	}
+	for (let i = 0; i < 20; i++) {
+		let angle = 2 * Math.PI * i / 20;
+		line(mouseX, mouseY, mouseX + 50 * Math.cos(angle), mouseY + 50 * Math.sin(angle));
 	}
 }
 
