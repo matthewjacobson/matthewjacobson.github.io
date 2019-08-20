@@ -194,7 +194,7 @@ function draw() {
 	}
 	flood.sort((a, b) => a.angle - b.angle);
 	beginShape();
-		for (let i = 0; i < flood.length(); i++) {
+		for (let i = 0; i < flood.length; i++) {
 			vertex(flood[i].x, flood[i].y);
 		}
 	endShape(CLOSE);
