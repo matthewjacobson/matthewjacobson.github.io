@@ -146,7 +146,6 @@ function getRayCast(ray) {
 	for (let i = 0; i < walls.length; i++) {
 		let checkIntersect = lineLineIntersection(rayLine, walls[i]);
 		if (checkIntersect.bIntersect) {
-			ellipse(checkIntersect.x, checkIntersect.y, 2, 2);
 			hit = true;
 			let currDist = dist(ray.x, ray.y, checkIntersect.x, checkIntersect.y);
 			if (currDist < minDist) {
@@ -203,20 +202,11 @@ function draw() {
 	}
 	flood.sort((a, b) => a.angle - b.angle);
 
-	// beginShape();
-	// 	for (let i = 0; i < flood.length; i++) {
-	// 		line(mouseX, mouseY, flood[i].x, flood[i].y);
-	// 		vertex(flood[i].x, flood[i].y);
-	// 	}
-	// endShape(CLOSE);
-
-	for (let i = 0; i < flood.length; i++) {
-		beginShape();
-			vertex(mouseX, mouseY);
+	beginShape();
+		for (let i = 0; i < flood.length; i++) {
 			vertex(flood[i].x, flood[i].y);
-			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-		endShape();
-	}
+		}
+	endShape(CLOSE);
 }
 
 function windowResized() {
