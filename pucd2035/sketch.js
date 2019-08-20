@@ -72,22 +72,22 @@ function getPathOutline(cmds) {
 				cy = cmd.y;
 				break;
 			case 'C': // curve to
-				let bezier = getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
-				currPath = currPath.concat(bezier.points);
-				if (bezier.xMin < xMin) xMin = bezier.xMin;
-				if (bezier.xMax > xMax) xMax = bezier.xMax;
-				if (bezier.yMin < yMin) yMin = bezier.yMin;
-				if (bezier.yMax > yMax) yMax = bezier.yMax;
+				let curve = getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x2, cmd.y2, cmd.x, cmd.y);
+				currPath = currPath.concat(curve.points);
+				if (curve.xMin < xMin) xMin = curve.xMin;
+				if (curve.xMax > xMax) xMax = curve.xMax;
+				if (curve.yMin < yMin) yMin = curve.yMin;
+				if (curve.yMax > yMax) yMax = curve.yMax;
 				cx = cmd.x;
 				cy = cmd.y;
 				break;
 			case 'Q': // quad to
-				let bezier = getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x1, cmd.y1, cmd.x, cmd.y);
-				currPath = currPath.concat(bezier.points);
-				if (bezier.xMin < xMin) xMin = bezier.xMin;
-				if (bezier.xMax > xMax) xMax = bezier.xMax;
-				if (bezier.yMin < yMin) yMin = bezier.yMin;
-				if (bezier.yMax > yMax) yMax = bezier.yMax;
+				let quad = getBezierPoints(cx, cy, cmd.x1, cmd.y1, cmd.x1, cmd.y1, cmd.x, cmd.y);
+				currPath = currPath.concat(quad.points);
+				if (quad.xMin < xMin) xMin = quad.xMin;
+				if (quad.xMax > xMax) xMax = quad.xMax;
+				if (quad.yMin < yMin) yMin = quad.yMin;
+				if (quad.yMax > yMax) yMax = quad.yMax;
 				cx = cmd.x;
 				cy = cmd.y;
 				break;
