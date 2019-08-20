@@ -184,7 +184,7 @@ function draw() {
 		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
 	}
 	for (let i = 0; i < walls.length; i++) {
-		let angle = Math.atan2(mouseY - walls[i].y1, mouseX - walls[i].x1);
+		let angle = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX);
 		let ray = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
 		let cast = getRayCast(ray);
 		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
