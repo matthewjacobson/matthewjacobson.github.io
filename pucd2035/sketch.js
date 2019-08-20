@@ -206,8 +206,6 @@ function draw() {
 			vertex(flood[i].x, flood[i].y);
 		}
 	endShape(CLOSE);
-
-	console.log("flood size: " + floodSize);
 }
 
 function windowResized() {
@@ -216,6 +214,5 @@ function windowResized() {
 }
 
 function mouseWheel(event) {
-	console.log(event.delta);
-	floodSize = Math.max(50, Math.min(500, floodSize + event.delta));
+	floodSize = Math.max(50, Math.min(500, floodSize + Math.max(2, Math.min(2, event.delta));
 }
