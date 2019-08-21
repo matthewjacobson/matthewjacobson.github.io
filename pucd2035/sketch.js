@@ -313,153 +313,153 @@ function draw() {
 	let a;
 	let b;
 	let c;
-	if (ordering == 0) {
+	if ((ordering % 36) == 0) {
 		let x1
 		a = {x: 100, y: 150};
 		b = {x: 200, y: 200};
 		c = {x: 400, y: 350};
-	} else if (ordering == 1) {
+	} else if ((ordering % 36) == 1) {
 		a = {x: 100, y: 150};
 		b = {x: 200, y: 350};
 		c = {x: 400, y: 200};
-	} else if (ordering == 2) {
+	} else if ((ordering % 36) == 2) {
 		a = {x: 100, y: 200};
 		b = {x: 200, y: 150};
 		c = {x: 400, y: 350};
-	} else if (ordering == 3) {
+	} else if ((ordering % 36) == 3) {
 		a = {x: 100, y: 350};
 		b = {x: 200, y: 150};
 		c = {x: 400, y: 200};
-	} else if (ordering == 4) {
+	} else if ((ordering % 36) == 4) {
 		a = {x: 100, y: 200};
 		b = {x: 200, y: 350};
 		c = {x: 400, y: 150};
-	} else if (ordering == 5) {
+	} else if ((ordering % 36) == 5) {
 		a = {x: 100, y: 350};
 		b = {x: 200, y: 200};
 		c = {x: 400, y: 150};
 //--------------------------------------------------
-	} else if (ordering == 6) {
+	} else if ((ordering % 36) == 6) {
 		a = {x: 100, y: 150};
 		b = {x: 400, y: 200};
 		c = {x: 200, y: 350};
-	} else if (ordering == 7) {
+	} else if ((ordering % 36) == 7) {
 		a = {x: 100, y: 150};
 		b = {x: 400, y: 350};
 		c = {x: 200, y: 200};
-	} else if (ordering == 8) {
+	} else if ((ordering % 36) == 8) {
 		a = {x: 100, y: 200};
 		b = {x: 400, y: 150};
 		c = {x: 200, y: 350};
-	} else if (ordering == 9) {
+	} else if ((ordering % 36) == 9) {
 		a = {x: 100, y: 350};
 		b = {x: 400, y: 150};
 		c = {x: 200, y: 200};
-	} else if (ordering == 10) {
+	} else if ((ordering % 36) == 10) {
 		a = {x: 100, y: 200};
 		b = {x: 400, y: 350};
 		c = {x: 200, y: 150};
-	} else if (ordering == 11) {
+	} else if ((ordering % 36) == 11) {
 		a = {x: 100, y: 350};
 		b = {x: 400, y: 200};
 		c = {x: 200, y: 150};
 //--------------------------------------------------
-	} else if (ordering == 12) {
+	} else if ((ordering % 36) == 12) {
 		a = {x: 200, y: 150};
 		b = {x: 100, y: 200};
 		c = {x: 400, y: 350};
-	} else if (ordering == 13) {
+	} else if ((ordering % 36) == 13) {
 		a = {x: 200, y: 150};
 		b = {x: 100, y: 350};
 		c = {x: 400, y: 200};
-	} else if (ordering == 14) {
+	} else if ((ordering % 36) == 14) {
 		a = {x: 200, y: 200};
 		b = {x: 100, y: 150};
 		c = {x: 400, y: 350};
-	} else if (ordering == 15) {
+	} else if ((ordering % 36) == 15) {
 		a = {x: 200, y: 350};
 		b = {x: 100, y: 150};
 		c = {x: 400, y: 200};
-	} else if (ordering == 16) {
+	} else if ((ordering % 36) == 16) {
 		a = {x: 200, y: 200};
 		b = {x: 100, y: 350};
 		c = {x: 400, y: 150};
-	} else if (ordering == 17) {
+	} else if ((ordering % 36) == 17) {
 		a = {x: 200, y: 350};
 		b = {x: 100, y: 200};
 		c = {x: 400, y: 150};
 //--------------------------------------------------
-	} else if (ordering == 18) {
+	} else if ((ordering % 36) == 18) {
 		a = {x: 400, y: 150};
 		b = {x: 100, y: 200};
 		c = {x: 200, y: 350};
-	} else if (ordering == 19) {
+	} else if ((ordering % 36) == 19) {
 		a = {x: 400, y: 150};
 		b = {x: 100, y: 350};
 		c = {x: 200, y: 200};
-	} else if (ordering == 20) {
+	} else if ((ordering % 36) == 20) {
 		a = {x: 400, y: 200};
 		b = {x: 100, y: 150};
 		c = {x: 200, y: 350};
-	} else if (ordering == 21) {
+	} else if ((ordering % 36) == 21) {
 		a = {x: 400, y: 350};
 		b = {x: 100, y: 150};
 		c = {x: 200, y: 200};
-	} else if (ordering == 22) {
+	} else if ((ordering % 36) == 22) {
 		a = {x: 400, y: 200};
 		b = {x: 100, y: 350};
 		c = {x: 200, y: 150};
-	} else if (ordering == 23) {
+	} else if ((ordering % 36) == 23) {
 		a = {x: 400, y: 350};
 		b = {x: 100, y: 200};
 		c = {x: 200, y: 150};
 //--------------------------------------------------
-	} else if (ordering == 24) {
+	} else if ((ordering % 36) == 24) {
 		a = {x: 200, y: 150};
 		b = {x: 400, y: 200};
 		c = {x: 100, y: 350};
-	} else if (ordering == 25) {
+	} else if ((ordering % 36) == 25) {
 		a = {x: 200, y: 150};
 		b = {x: 400, y: 350};
 		c = {x: 100, y: 200};
-	} else if (ordering == 26) {
+	} else if ((ordering % 36) == 26) {
 		a = {x: 200, y: 200};
 		b = {x: 400, y: 150};
 		c = {x: 100, y: 350};
-	} else if (ordering == 27) {
+	} else if ((ordering % 36) == 27) {
 		a = {x: 200, y: 350};
 		b = {x: 400, y: 150};
 		c = {x: 100, y: 200};
-	} else if (ordering == 28) {
+	} else if ((ordering % 36) == 28) {
 		a = {x: 200, y: 200};
 		b = {x: 400, y: 350};
 		c = {x: 100, y: 150};
-	} else if (ordering == 29) {
+	} else if ((ordering % 36) == 29) {
 		a = {x: 200, y: 350};
 		b = {x: 400, y: 200};
 		c = {x: 100, y: 150};
 //--------------------------------------------------
-	} else if (ordering == 30) {
+	} else if ((ordering % 36) == 30) {
 		a = {x: 400, y: 150};
 		b = {x: 200, y: 200};
 		c = {x: 100, y: 350};
-	} else if (ordering == 31) {
+	} else if ((ordering % 36) == 31) {
 		a = {x: 400, y: 150};
 		b = {x: 200, y: 350};
 		c = {x: 100, y: 200};
-	} else if (ordering == 32) {
+	} else if ((ordering % 36) == 32) {
 		a = {x: 400, y: 200};
 		b = {x: 200, y: 150};
 		c = {x: 100, y: 350};
-	} else if (ordering == 33) {
+	} else if ((ordering % 36) == 33) {
 		a = {x: 400, y: 350};
 		b = {x: 200, y: 150};
 		c = {x: 100, y: 200};
-	} else if (ordering == 34) {
+	} else if ((ordering % 36) == 34) {
 		a = {x: 400, y: 200};
 		b = {x: 200, y: 350};
 		c = {x: 100, y: 150};
-	} else if (ordering == 35) {
+	} else if ((ordering % 36) == 35) {
 		a = {x: 400, y: 350};
 		b = {x: 200, y: 200};
 		c = {x: 100, y: 150};
