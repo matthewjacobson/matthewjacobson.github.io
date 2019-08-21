@@ -202,8 +202,8 @@ function draw() {
 // 	}
 	flood.sort((a, b) => a.angle - b.angle);
 
-	if (frameCount == 0) {
-		consol.log(flood);
+	if (frameCount == 1) {
+		console.log(flood);
 	}
 // 	beginShape();
 // 		for (let i = 0; i < flood.length; i++) {
