@@ -237,7 +237,7 @@ function draw() {
 				fill(0);
 				vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
 			} else {
-				if (flood[index % flood.length].y - mouseY < 0 && flood[(index + 1) % flood.length].y - mouseY < 0) {
+				if (flood[index % flood.length].y - mouseY < 0) {
 					if (pressed) console.log("case 2: " + index);
 					fill(0);
 					vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
