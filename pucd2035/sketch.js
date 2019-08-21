@@ -310,220 +310,254 @@ function draw() {
 // 		endShape();
 // 	}
 	
-	let a;
-	let b;
-	let c;
-	if ((ordering % 36) == 0) {
-		let x1
-		a = {x: 100, y: 150};
-		b = {x: 200, y: 200};
-		c = {x: 400, y: 350};
-	} else if ((ordering % 36) == 1) {
-		a = {x: 100, y: 150};
-		b = {x: 200, y: 350};
-		c = {x: 400, y: 200};
-	} else if ((ordering % 36) == 2) {
-		a = {x: 100, y: 200};
-		b = {x: 200, y: 150};
-		c = {x: 400, y: 350};
-	} else if ((ordering % 36) == 3) {
-		a = {x: 100, y: 350};
-		b = {x: 200, y: 150};
-		c = {x: 400, y: 200};
-	} else if ((ordering % 36) == 4) {
-		a = {x: 100, y: 200};
-		b = {x: 200, y: 350};
-		c = {x: 400, y: 150};
-	} else if ((ordering % 36) == 5) {
-		a = {x: 100, y: 350};
-		b = {x: 200, y: 200};
-		c = {x: 400, y: 150};
-//--------------------------------------------------
-	} else if ((ordering % 36) == 6) {
-		a = {x: 100, y: 150};
-		b = {x: 400, y: 200};
-		c = {x: 200, y: 350};
-	} else if ((ordering % 36) == 7) {
-		a = {x: 100, y: 150};
-		b = {x: 400, y: 350};
-		c = {x: 200, y: 200};
-	} else if ((ordering % 36) == 8) {
-		a = {x: 100, y: 200};
-		b = {x: 400, y: 150};
-		c = {x: 200, y: 350};
-	} else if ((ordering % 36) == 9) {
-		a = {x: 100, y: 350};
-		b = {x: 400, y: 150};
-		c = {x: 200, y: 200};
-	} else if ((ordering % 36) == 10) {
-		a = {x: 100, y: 200};
-		b = {x: 400, y: 350};
-		c = {x: 200, y: 150};
-	} else if ((ordering % 36) == 11) {
-		a = {x: 100, y: 350};
-		b = {x: 400, y: 200};
-		c = {x: 200, y: 150};
-//--------------------------------------------------
-	} else if ((ordering % 36) == 12) {
-		a = {x: 200, y: 150};
-		b = {x: 100, y: 200};
-		c = {x: 400, y: 350};
-	} else if ((ordering % 36) == 13) {
-		a = {x: 200, y: 150};
-		b = {x: 100, y: 350};
-		c = {x: 400, y: 200};
-	} else if ((ordering % 36) == 14) {
-		a = {x: 200, y: 200};
-		b = {x: 100, y: 150};
-		c = {x: 400, y: 350};
-	} else if ((ordering % 36) == 15) {
-		a = {x: 200, y: 350};
-		b = {x: 100, y: 150};
-		c = {x: 400, y: 200};
-	} else if ((ordering % 36) == 16) {
-		a = {x: 200, y: 200};
-		b = {x: 100, y: 350};
-		c = {x: 400, y: 150};
-	} else if ((ordering % 36) == 17) {
-		a = {x: 200, y: 350};
-		b = {x: 100, y: 200};
-		c = {x: 400, y: 150};
-//--------------------------------------------------
-	} else if ((ordering % 36) == 18) {
-		a = {x: 400, y: 150};
-		b = {x: 100, y: 200};
-		c = {x: 200, y: 350};
-	} else if ((ordering % 36) == 19) {
-		a = {x: 400, y: 150};
-		b = {x: 100, y: 350};
-		c = {x: 200, y: 200};
-	} else if ((ordering % 36) == 20) {
-		a = {x: 400, y: 200};
-		b = {x: 100, y: 150};
-		c = {x: 200, y: 350};
-	} else if ((ordering % 36) == 21) {
-		a = {x: 400, y: 350};
-		b = {x: 100, y: 150};
-		c = {x: 200, y: 200};
-	} else if ((ordering % 36) == 22) {
-		a = {x: 400, y: 200};
-		b = {x: 100, y: 350};
-		c = {x: 200, y: 150};
-	} else if ((ordering % 36) == 23) {
-		a = {x: 400, y: 350};
-		b = {x: 100, y: 200};
-		c = {x: 200, y: 150};
-//--------------------------------------------------
-	} else if ((ordering % 36) == 24) {
-		a = {x: 200, y: 150};
-		b = {x: 400, y: 200};
-		c = {x: 100, y: 350};
-	} else if ((ordering % 36) == 25) {
-		a = {x: 200, y: 150};
-		b = {x: 400, y: 350};
-		c = {x: 100, y: 200};
-	} else if ((ordering % 36) == 26) {
-		a = {x: 200, y: 200};
-		b = {x: 400, y: 150};
-		c = {x: 100, y: 350};
-	} else if ((ordering % 36) == 27) {
-		a = {x: 200, y: 350};
-		b = {x: 400, y: 150};
-		c = {x: 100, y: 200};
-	} else if ((ordering % 36) == 28) {
-		a = {x: 200, y: 200};
-		b = {x: 400, y: 350};
-		c = {x: 100, y: 150};
-	} else if ((ordering % 36) == 29) {
-		a = {x: 200, y: 350};
-		b = {x: 400, y: 200};
-		c = {x: 100, y: 150};
-//--------------------------------------------------
-	} else if ((ordering % 36) == 30) {
-		a = {x: 400, y: 150};
-		b = {x: 200, y: 200};
-		c = {x: 100, y: 350};
-	} else if ((ordering % 36) == 31) {
-		a = {x: 400, y: 150};
-		b = {x: 200, y: 350};
-		c = {x: 100, y: 200};
-	} else if ((ordering % 36) == 32) {
-		a = {x: 400, y: 200};
-		b = {x: 200, y: 150};
-		c = {x: 100, y: 350};
-	} else if ((ordering % 36) == 33) {
-		a = {x: 400, y: 350};
-		b = {x: 200, y: 150};
-		c = {x: 100, y: 200};
-	} else if ((ordering % 36) == 34) {
-		a = {x: 400, y: 200};
-		b = {x: 200, y: 350};
-		c = {x: 100, y: 150};
-	} else if ((ordering % 36) == 35) {
-		a = {x: 400, y: 350};
-		b = {x: 200, y: 200};
-		c = {x: 100, y: 150};
-	}
-	drawCases(a, b, c, test % 6);
-	fill(255, 0, 0);
-	ellipse(a.x, a.y, 2);
-	
-// 	for (let i = 0; i < flood.length; i++) {
-// 		let a = {x: mouseX, y: mouseY};
-// 		let b = {x: flood[i % flood.length].x, y: flood[i % flood.length].y};
-// 		let c = {x: flood[(i + 1) % flood.length].x, y: flood[(i + 1) % flood.length].y};
-// 		if (a.x < b.x && b.x < c.x) {
-// 			if (a.y < b.y && b.y < c.y) {
-// 				drawCases(a, b, c, 2);
-// 				drawCases(a, b, c, 4);
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else {
-// 			}
-// 		} else if (a.x < c.x && c.x < b.x) {
-// 			if (a.y < b.y && b.y < c.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else {
-// 			}
-// 		} else if (a.x < c.x && c.x < b.x) {
-// 			if (a.y < b.y && b.y < c.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else {
-// 			}
-// 		} else if (a.x < c.x && c.x < b.x) {
-// 			if (a.y < b.y && b.y < c.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else {
-// 			}
-// 		} else if (a.x < c.x && c.x < b.x) {
-// 			if (a.y < b.y && b.y < c.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else {
-// 			}
-// 		} else {
-// 			if (a.y < b.y && b.y < c.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else if (a.y < c.y && c.y < b.y) {
-// 			} else {
-// 			}
-// 		}
+// 	let a;
+// 	let b;
+// 	let c;
+// 	if ((ordering % 36) == 0) {
+// 		let x1
+// 		a = {x: 100, y: 150};
+// 		b = {x: 200, y: 200};
+// 		c = {x: 400, y: 350};
+// 	} else if ((ordering % 36) == 1) {
+// 		a = {x: 100, y: 150};
+// 		b = {x: 200, y: 350};
+// 		c = {x: 400, y: 200};
+// 	} else if ((ordering % 36) == 2) {
+// 		a = {x: 100, y: 200};
+// 		b = {x: 200, y: 150};
+// 		c = {x: 400, y: 350};
+// 	} else if ((ordering % 36) == 3) {
+// 		a = {x: 100, y: 350};
+// 		b = {x: 200, y: 150};
+// 		c = {x: 400, y: 200};
+// 	} else if ((ordering % 36) == 4) {
+// 		a = {x: 100, y: 200};
+// 		b = {x: 200, y: 350};
+// 		c = {x: 400, y: 150};
+// 	} else if ((ordering % 36) == 5) {
+// 		a = {x: 100, y: 350};
+// 		b = {x: 200, y: 200};
+// 		c = {x: 400, y: 150};
+// //--------------------------------------------------
+// 	} else if ((ordering % 36) == 6) {
+// 		a = {x: 100, y: 150};
+// 		b = {x: 400, y: 200};
+// 		c = {x: 200, y: 350};
+// 	} else if ((ordering % 36) == 7) {
+// 		a = {x: 100, y: 150};
+// 		b = {x: 400, y: 350};
+// 		c = {x: 200, y: 200};
+// 	} else if ((ordering % 36) == 8) {
+// 		a = {x: 100, y: 200};
+// 		b = {x: 400, y: 150};
+// 		c = {x: 200, y: 350};
+// 	} else if ((ordering % 36) == 9) {
+// 		a = {x: 100, y: 350};
+// 		b = {x: 400, y: 150};
+// 		c = {x: 200, y: 200};
+// 	} else if ((ordering % 36) == 10) {
+// 		a = {x: 100, y: 200};
+// 		b = {x: 400, y: 350};
+// 		c = {x: 200, y: 150};
+// 	} else if ((ordering % 36) == 11) {
+// 		a = {x: 100, y: 350};
+// 		b = {x: 400, y: 200};
+// 		c = {x: 200, y: 150};
+// //--------------------------------------------------
+// 	} else if ((ordering % 36) == 12) {
+// 		a = {x: 200, y: 150};
+// 		b = {x: 100, y: 200};
+// 		c = {x: 400, y: 350};
+// 	} else if ((ordering % 36) == 13) {
+// 		a = {x: 200, y: 150};
+// 		b = {x: 100, y: 350};
+// 		c = {x: 400, y: 200};
+// 	} else if ((ordering % 36) == 14) {
+// 		a = {x: 200, y: 200};
+// 		b = {x: 100, y: 150};
+// 		c = {x: 400, y: 350};
+// 	} else if ((ordering % 36) == 15) {
+// 		a = {x: 200, y: 350};
+// 		b = {x: 100, y: 150};
+// 		c = {x: 400, y: 200};
+// 	} else if ((ordering % 36) == 16) {
+// 		a = {x: 200, y: 200};
+// 		b = {x: 100, y: 350};
+// 		c = {x: 400, y: 150};
+// 	} else if ((ordering % 36) == 17) {
+// 		a = {x: 200, y: 350};
+// 		b = {x: 100, y: 200};
+// 		c = {x: 400, y: 150};
+// //--------------------------------------------------
+// 	} else if ((ordering % 36) == 18) {
+// 		a = {x: 400, y: 150};
+// 		b = {x: 100, y: 200};
+// 		c = {x: 200, y: 350};
+// 	} else if ((ordering % 36) == 19) {
+// 		a = {x: 400, y: 150};
+// 		b = {x: 100, y: 350};
+// 		c = {x: 200, y: 200};
+// 	} else if ((ordering % 36) == 20) {
+// 		a = {x: 400, y: 200};
+// 		b = {x: 100, y: 150};
+// 		c = {x: 200, y: 350};
+// 	} else if ((ordering % 36) == 21) {
+// 		a = {x: 400, y: 350};
+// 		b = {x: 100, y: 150};
+// 		c = {x: 200, y: 200};
+// 	} else if ((ordering % 36) == 22) {
+// 		a = {x: 400, y: 200};
+// 		b = {x: 100, y: 350};
+// 		c = {x: 200, y: 150};
+// 	} else if ((ordering % 36) == 23) {
+// 		a = {x: 400, y: 350};
+// 		b = {x: 100, y: 200};
+// 		c = {x: 200, y: 150};
+// //--------------------------------------------------
+// 	} else if ((ordering % 36) == 24) {
+// 		a = {x: 200, y: 150};
+// 		b = {x: 400, y: 200};
+// 		c = {x: 100, y: 350};
+// 	} else if ((ordering % 36) == 25) {
+// 		a = {x: 200, y: 150};
+// 		b = {x: 400, y: 350};
+// 		c = {x: 100, y: 200};
+// 	} else if ((ordering % 36) == 26) {
+// 		a = {x: 200, y: 200};
+// 		b = {x: 400, y: 150};
+// 		c = {x: 100, y: 350};
+// 	} else if ((ordering % 36) == 27) {
+// 		a = {x: 200, y: 350};
+// 		b = {x: 400, y: 150};
+// 		c = {x: 100, y: 200};
+// 	} else if ((ordering % 36) == 28) {
+// 		a = {x: 200, y: 200};
+// 		b = {x: 400, y: 350};
+// 		c = {x: 100, y: 150};
+// 	} else if ((ordering % 36) == 29) {
+// 		a = {x: 200, y: 350};
+// 		b = {x: 400, y: 200};
+// 		c = {x: 100, y: 150};
+// //--------------------------------------------------
+// 	} else if ((ordering % 36) == 30) {
+// 		a = {x: 400, y: 150};
+// 		b = {x: 200, y: 200};
+// 		c = {x: 100, y: 350};
+// 	} else if ((ordering % 36) == 31) {
+// 		a = {x: 400, y: 150};
+// 		b = {x: 200, y: 350};
+// 		c = {x: 100, y: 200};
+// 	} else if ((ordering % 36) == 32) {
+// 		a = {x: 400, y: 200};
+// 		b = {x: 200, y: 150};
+// 		c = {x: 100, y: 350};
+// 	} else if ((ordering % 36) == 33) {
+// 		a = {x: 400, y: 350};
+// 		b = {x: 200, y: 150};
+// 		c = {x: 100, y: 200};
+// 	} else if ((ordering % 36) == 34) {
+// 		a = {x: 400, y: 200};
+// 		b = {x: 200, y: 350};
+// 		c = {x: 100, y: 150};
+// 	} else if ((ordering % 36) == 35) {
+// 		a = {x: 400, y: 350};
+// 		b = {x: 200, y: 200};
+// 		c = {x: 100, y: 150};
 // 	}
+// 	drawCases(a, b, c, test % 6);
+// 	fill(255, 0, 0);
+// 	ellipse(a.x, a.y, 2);
+	
+	for (let i = 0; i < flood.length; i++) {
+		let a = {x: mouseX, y: mouseY};
+		let b = {x: flood[i % flood.length].x, y: flood[i % flood.length].y};
+		let c = {x: flood[(i + 1) % flood.length].x, y: flood[(i + 1) % flood.length].y};
+		if (a.x < b.x && b.x < c.x) {
+			if (a.y < b.y && b.y < c.y) {
+				drawCases(a, b, c, 2);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 2);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 2);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else {
+				drawCases(a, b, c, 2);
+			}
+		} else if (a.x < c.x && c.x < b.x) {
+			if (a.y < b.y && b.y < c.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 2);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 2);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 2);
+			} else {
+				drawCases(a, b, c, 2);
+			}
+		} else if (a.x < c.x && c.x < b.x) {
+			if (a.y < b.y && b.y < c.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 2);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else {
+				drawCases(a, b, c, 2);
+			}
+		} else if (a.x < c.x && c.x < b.x) {
+			if (a.y < b.y && b.y < c.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else {
+				drawCases(a, b, c, 0);
+			}
+		} else if (a.x < c.x && c.x < b.x) {
+			if (a.y < b.y && b.y < c.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 2);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 3);
+			} else {
+				drawCases(a, b, c, 2);
+			}
+		} else {
+			if (a.y < b.y && b.y < c.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else if (a.y < c.y && c.y < b.y) {
+				drawCases(a, b, c, 0);
+			} else {
+				drawCases(a, b, c, 0);
+			}
+		}
+	}
 	
 }
 
