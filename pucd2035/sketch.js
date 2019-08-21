@@ -178,7 +178,7 @@ function draw() {
 	}
 	let flood = [];
 	for (let i = 0; i < 20; i++) {
-		let angle = 2 * Math.PI * i / 20 - Math.PI;
+		let angle = 2 * Math.PI * i / 20;
 		let ray = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
 		let cast = getRayCast(ray);
 		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
