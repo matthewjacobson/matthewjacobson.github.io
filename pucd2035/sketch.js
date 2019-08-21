@@ -8,6 +8,7 @@ let walls;
 let floodSize;
 
 let test;
+let ordering;
 
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
@@ -169,6 +170,7 @@ function setup() {
 	getWalls();
 	floodSize = 100;
 	test = 0;
+	ordering = 0;
 }
 
 function drawCases(a, b, c, num) {
@@ -308,9 +310,160 @@ function draw() {
 // 		endShape();
 // 	}
 	
-	let a = {x: 100, y: 150};
-	let b = {x: 200, y: 200};
-	let c = {x: 400, y: 350};
+	let a;
+	let b;
+	let c;
+	if (ordering == 0) {
+		let x1
+		a = {x: 100, y: 150};
+		b = {x: 200, y: 200};
+		c = {x: 400, y: 350};
+	} else if (ordering == 1) {
+		a = {x: 100, y: 150};
+		b = {x: 200, y: 350};
+		c = {x: 400, y: 200};
+	} else if (ordering == 2) {
+		a = {x: 100, y: 200};
+		b = {x: 200, y: 150};
+		c = {x: 400, y: 350};
+	} else if (ordering == 3) {
+		a = {x: 100, y: 350};
+		b = {x: 200, y: 150};
+		c = {x: 400, y: 200};
+	} else if (ordering == 4) {
+		a = {x: 100, y: 200};
+		b = {x: 200, y: 350};
+		c = {x: 400, y: 150};
+	} else if (ordering == 5) {
+		a = {x: 100, y: 350};
+		b = {x: 200, y: 200};
+		c = {x: 400, y: 150};
+//--------------------------------------------------
+	} else if (ordering == 6) {
+		a = {x: 100, y: 150};
+		b = {x: 400, y: 200};
+		c = {x: 200, y: 350};
+	} else if (ordering == 7) {
+		a = {x: 100, y: 150};
+		b = {x: 400, y: 350};
+		c = {x: 200, y: 200};
+	} else if (ordering == 8) {
+		a = {x: 100, y: 200};
+		b = {x: 400, y: 150};
+		c = {x: 200, y: 350};
+	} else if (ordering == 9) {
+		a = {x: 100, y: 350};
+		b = {x: 400, y: 150};
+		c = {x: 200, y: 200};
+	} else if (ordering == 10) {
+		a = {x: 100, y: 200};
+		b = {x: 400, y: 350};
+		c = {x: 200, y: 150};
+	} else if (ordering == 11) {
+		a = {x: 100, y: 350};
+		b = {x: 400, y: 200};
+		c = {x: 200, y: 150};
+//--------------------------------------------------
+	} else if (ordering == 12) {
+		a = {x: 200, y: 150};
+		b = {x: 100, y: 200};
+		c = {x: 400, y: 350};
+	} else if (ordering == 13) {
+		a = {x: 200, y: 150};
+		b = {x: 100, y: 350};
+		c = {x: 400, y: 200};
+	} else if (ordering == 14) {
+		a = {x: 200, y: 200};
+		b = {x: 100, y: 150};
+		c = {x: 400, y: 350};
+	} else if (ordering == 15) {
+		a = {x: 200, y: 350};
+		b = {x: 100, y: 150};
+		c = {x: 400, y: 200};
+	} else if (ordering == 16) {
+		a = {x: 200, y: 200};
+		b = {x: 100, y: 350};
+		c = {x: 400, y: 150};
+	} else if (ordering == 17) {
+		a = {x: 200, y: 350};
+		b = {x: 100, y: 200};
+		c = {x: 400, y: 150};
+//--------------------------------------------------
+	} else if (ordering == 18) {
+		a = {x: 400, y: 150};
+		b = {x: 100, y: 200};
+		c = {x: 200, y: 350};
+	} else if (ordering == 19) {
+		a = {x: 400, y: 150};
+		b = {x: 100, y: 350};
+		c = {x: 200, y: 200};
+	} else if (ordering == 20) {
+		a = {x: 400, y: 200};
+		b = {x: 100, y: 150};
+		c = {x: 200, y: 350};
+	} else if (ordering == 21) {
+		a = {x: 400, y: 350};
+		b = {x: 100, y: 150};
+		c = {x: 200, y: 200};
+	} else if (ordering == 22) {
+		a = {x: 400, y: 200};
+		b = {x: 100, y: 350};
+		c = {x: 200, y: 150};
+	} else if (ordering == 23) {
+		a = {x: 400, y: 350};
+		b = {x: 100, y: 200};
+		c = {x: 200, y: 150};
+//--------------------------------------------------
+	} else if (ordering == 24) {
+		a = {x: 200, y: 150};
+		b = {x: 400, y: 200};
+		c = {x: 100, y: 350};
+	} else if (ordering == 25) {
+		a = {x: 200, y: 150};
+		b = {x: 400, y: 350};
+		c = {x: 100, y: 200};
+	} else if (ordering == 26) {
+		a = {x: 200, y: 200};
+		b = {x: 400, y: 150};
+		c = {x: 100, y: 350};
+	} else if (ordering == 27) {
+		a = {x: 200, y: 350};
+		b = {x: 400, y: 150};
+		c = {x: 100, y: 200};
+	} else if (ordering == 28) {
+		a = {x: 200, y: 200};
+		b = {x: 400, y: 350};
+		c = {x: 100, y: 150};
+	} else if (ordering == 29) {
+		a = {x: 200, y: 350};
+		b = {x: 400, y: 200};
+		c = {x: 100, y: 150};
+//--------------------------------------------------
+	} else if (ordering == 30) {
+		a = {x: 400, y: 150};
+		b = {x: 200, y: 200};
+		c = {x: 100, y: 350};
+	} else if (ordering == 31) {
+		a = {x: 400, y: 150};
+		b = {x: 200, y: 350};
+		c = {x: 100, y: 200};
+	} else if (ordering == 32) {
+		a = {x: 400, y: 200};
+		b = {x: 200, y: 150};
+		c = {x: 100, y: 350};
+	} else if (ordering == 33) {
+		a = {x: 400, y: 350};
+		b = {x: 200, y: 150};
+		c = {x: 100, y: 200};
+	} else if (ordering == 34) {
+		a = {x: 400, y: 200};
+		b = {x: 200, y: 350};
+		c = {x: 100, y: 150};
+	} else if (ordering == 35) {
+		a = {x: 400, y: 350};
+		b = {x: 200, y: 200};
+		c = {x: 100, y: 150};
+	}
 	drawCases(a, b, c, test % 6);
 	fill(255, 0, 0);
 	ellipse(a.x, a.y, 2);
@@ -321,8 +474,8 @@ function draw() {
 // 		let c = {x: flood[(i + 1) % flood.length].x, y: flood[(i + 1) % flood.length].y};
 // 		if (a.x < b.x && b.x < c.x) {
 // 			if (a.y < b.y && b.y < c.y) {
-// 				drawCases(a, b, c, 1);
-// 				drawCases(a, b, c, 3);
+// 				drawCases(a, b, c, 2);
+// 				drawCases(a, b, c, 4);
 // 			} else if (a.y < c.y && c.y < b.y) {
 // 			} else if (a.y < c.y && c.y < b.y) {
 // 			} else if (a.y < c.y && c.y < b.y) {
@@ -384,6 +537,16 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
-	test++;
-	console.log(test % 6);
+	if (keyCode === LEFT_ARROW) {
+		test--;
+		if (test < 0) test += 6;
+	} else if (keyCode === RIGHT_ARROW) {
+		test++;
+	} else if (keyCode === DOWN_ARROW) {
+		ordering--;
+		if (ordering < 0) ordering += 36;
+	} else if (keyCode === UP_ARROW) {
+		ordering++;
+	}
+	console.log("Ordering: " + ordering + ", Case: " + test);	
 }
