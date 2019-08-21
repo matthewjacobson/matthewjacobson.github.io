@@ -237,13 +237,23 @@ function draw() {
 				fill(0);
 				vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
 			} else {
-				if (pressed) console.log("case 2: " + index);
-				fill(0);
-				vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
-				fill(0);
-				vertex(flood[index % flood.length].x, flood[index % flood.length].y);
-				fill(255);
-				vertex(mouseX, mouseY);
+				if (flood[index % flood.length].y - mouseY < 0 && flood[(index + 1) % flood.length].y - mouseY < 0) {
+					if (pressed) console.log("case 2: " + index);
+					fill(0);
+					vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+					fill(255);
+					vertex(mouseX, mouseY);
+					fill(0);
+					vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+				} else {
+					if (pressed) console.log("case 3: " + index);
+					fill(0);
+					vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+					fill(0);
+					vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+					fill(255);
+					vertex(mouseX, mouseY);
+				}
 			}
 		endShape();
 	pressed = false;
