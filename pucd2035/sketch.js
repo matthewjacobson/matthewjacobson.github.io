@@ -230,7 +230,7 @@ function draw() {
 		beginShape();
 			fill(255);
 			vertex(mouseX, mouseY);
-			if (flood[index % flood.length].x < 0 && flood[(index + 1) % flood.length].x < 0) {
+			if (flood[index % flood.length].x - mouseX < 0 && flood[(index + 1) % flood.length].x - mouseX < 0) {
 				fill(0);
 				vertex(flood[index % flood.length].x, flood[index % flood.length].y);
 				fill(0);
