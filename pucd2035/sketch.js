@@ -7,9 +7,6 @@ let paths;
 let walls;
 let floodSize;
 
-let index;
-let pressed;
-
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
 	let steps = 10;
@@ -169,8 +166,6 @@ function setup() {
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
 	floodSize = 100;
-	index = 0;
-	pressed = true;
 }
 
 function draw() {
@@ -216,47 +211,33 @@ function draw() {
 // 		}
 // 	endShape(CLOSE);
 	
-// 	for (let i = 0; i < flood.length; i++) {
-// 		beginShape();
-// 			fill(255);
-// 			vertex(mouseX, mouseY);
-// 			fill(0);
-// 			vertex(flood[i].x, flood[i].y);
-// 			fill(0);
-// 			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-// 		endShape();
-// 	}
-	
-		beginShape();
-			if (flood[index % flood.length].x - mouseX < 0 && flood[(index + 1) % flood.length].x - mouseX <= 0) {
-				if (pressed) console.log("case 1: " + index);
+	for (let i = 0; i < flood.length; i++) {
+		if (flood[i % flood.length].x - mouseX < 0 && flood[(i + 1) % flood.length].x - mouseX <= 0) {
 				fill(255);
 				vertex(mouseX, mouseY);
 				fill(0);
-				vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+				vertex(flood[i % flood.length].x, flood[i % flood.length].y);
 				fill(0);
-				vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+				vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
 			} else {
-				if (flood[index % flood.length].y - mouseY < 0) {
-					if (pressed) console.log("case 2: " + index);
+				if (flood[i % flood.length].y - mouseY < 0) {
 					fill(0);
-					vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
 					fill(255);
 					vertex(mouseX, mouseY);
 					fill(0);
-					vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
 				} else {
-					if (pressed) console.log("case 3: " + index);
 					fill(0);
-					vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
 					fill(0);
-					vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
 					fill(255);
 					vertex(mouseX, mouseY);
 				}
 			}
-		endShape();
-	pressed = false;
+		}
+	}
 	
 }
 
@@ -270,6 +251,5 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
-	pressed = true;
-	index++;
+	
 }
