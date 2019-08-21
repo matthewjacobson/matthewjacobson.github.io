@@ -8,6 +8,7 @@ let walls;
 let floodSize;
 
 let index;
+let pressed;
 
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
@@ -169,6 +170,7 @@ function setup() {
 	getWalls();
 	floodSize = 100;
 	index = 0;
+	pressed = true;
 }
 
 function draw() {
@@ -229,10 +231,12 @@ function draw() {
 			fill(255);
 			vertex(mouseX, mouseY);
 			fill(0);
-			vertex(flood[index].x, flood[index].y);
+			vertex(flood[index % flood.length].x, flood[index % flood.length].y);
 			fill(0);
 			vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
 		endShape();
+	if (pressed) console.log(index);
+	pressed = false;
 	
 }
 
@@ -246,5 +250,6 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
+	pressed = true;
 	index++;
 }
