@@ -7,6 +7,8 @@ let paths;
 let walls;
 let floodSize;
 
+let index;
+
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
 	let steps = 10;
@@ -166,6 +168,7 @@ function setup() {
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
 	floodSize = 100;
+	index = 0;
 }
 
 function draw() {
@@ -211,16 +214,25 @@ function draw() {
 // 		}
 // 	endShape(CLOSE);
 	
-	for (let i = 0; i < flood.length; i++) {
+// 	for (let i = 0; i < flood.length; i++) {
+// 		beginShape();
+// 			fill(255);
+// 			vertex(mouseX, mouseY);
+// 			fill(0);
+// 			vertex(flood[i].x, flood[i].y);
+// 			fill(0);
+// 			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+// 		endShape();
+// 	}
+	
 		beginShape();
 			fill(255);
 			vertex(mouseX, mouseY);
 			fill(0);
-			vertex(flood[i].x, flood[i].y);
+			vertex(flood[index].x, flood[index].y);
 			fill(0);
-			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+			vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
 		endShape();
-	}
 	
 }
 
@@ -231,4 +243,8 @@ function windowResized() {
 
 function mouseWheel(event) {
 	floodSize = Math.max(50, Math.min(500, floodSize + Math.max(-2, Math.min(2, event.delta))));
+}
+
+function keyPressed() {
+	index++;
 }
