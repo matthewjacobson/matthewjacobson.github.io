@@ -230,6 +230,7 @@ function drawCases(a, b, c, num) {
 				vertex(a.x, a.y);
 			endShape();
 			break;
+	}
 }
 
 function draw() {
