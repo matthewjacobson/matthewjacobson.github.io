@@ -159,7 +159,7 @@ function getRayCast(ray) {
 }
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(windowWidth, windowHeight, WEBGL);
 	font = opentype.parse(fontData.bytes.buffer);
 	let outline = getPathOutline(font.getPath(string, 0, 0, 72).commands);
 	paths = outline.paths;
