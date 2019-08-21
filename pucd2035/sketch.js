@@ -202,11 +202,22 @@ function draw() {
 	}
 	flood.sort((a, b) => a.angle - b.angle);
 
-	beginShape();
-		for (let i = 0; i < flood.length; i++) {
+// 	beginShape();
+// 		for (let i = 0; i < flood.length; i++) {
+// 			vertex(flood[i].x, flood[i].y);
+// 		}
+// 	endShape(CLOSE);
+	
+	for (let i = 0; i < flood.length; i++) {
+		beginShape();
+			fill(255);
+			vertex(mouseX, mouseY);
+			fill(0);
 			vertex(flood[i].x, flood[i].y);
-		}
-	endShape(CLOSE);
+			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+		endShape(CLOSE);
+	}
+	
 }
 
 function windowResized() {
