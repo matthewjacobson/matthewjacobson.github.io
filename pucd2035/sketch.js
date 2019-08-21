@@ -228,7 +228,7 @@ function draw() {
 // 	}
 	
 		beginShape();
-			if (flood[index % flood.length].x - mouseX <= 0 && flood[(index + 1) % flood.length].x - mouseX <= 0) {
+			if (flood[index % flood.length].x - mouseX < 0 && flood[(index + 1) % flood.length].x - mouseX < 0) {
 				if (pressed) console.log("case 1: " + index);
 				fill(255);
 				vertex(mouseX, mouseY);
