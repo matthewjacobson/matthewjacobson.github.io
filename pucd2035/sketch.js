@@ -305,9 +305,9 @@ function draw() {
 // 		endShape();
 // 	}
 	
-	let a = {x: 80, y: 60};
-	let b = {x: 160, y: 120};
-	let c = {x: 240, y: 180};
+	let a = {x: 100, y: 150};
+	let b = {x: 200, y: 200};
+	let c = {x: 400, y: 350};
 	drawCases(a, b, c, 0);
 	fill(255, 0, 0);
 	ellipse(a.x, a.y, 2);
