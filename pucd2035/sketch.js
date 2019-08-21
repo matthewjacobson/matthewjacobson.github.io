@@ -309,8 +309,8 @@ function draw() {
 // 	}
 	
 	let a = {x: 100, y: 150};
-	let b = {x: 200, y: 350};
-	let c = {x: 400, y: 200};
+	let b = {x: 200, y: 200};
+	let c = {x: 400, y: 350};
 	drawCases(a, b, c, test % 6);
 	fill(255, 0, 0);
 	ellipse(a.x, a.y, 2);
@@ -384,6 +384,6 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
-	console.log(test % 6);
 	test++;
+	console.log(test % 6);
 }
