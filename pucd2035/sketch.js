@@ -212,30 +212,32 @@ function draw() {
 // 	endShape(CLOSE);
 	
 	for (let i = 0; i < flood.length; i++) {
-		if (flood[i % flood.length].x - mouseX < 0 && flood[(i + 1) % flood.length].x - mouseX <= 0) {
-				fill(255);
-				vertex(mouseX, mouseY);
-				fill(0);
-				vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-				fill(0);
-				vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-		} else {
-			if (flood[i % flood.length].y - mouseY < 0) {
-				fill(0);
-				vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-				fill(255);
-				vertex(mouseX, mouseY);
-				fill(0);
-				vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+		beginShape();
+			if (flood[i % flood.length].x - mouseX < 0 && flood[(i + 1) % flood.length].x - mouseX <= 0) {
+					fill(255);
+					vertex(mouseX, mouseY);
+					fill(0);
+					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+					fill(0);
+					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
 			} else {
-				fill(0);
-				vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-				fill(0);
-				vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-				fill(255);
-				vertex(mouseX, mouseY);
+				if (flood[i % flood.length].y - mouseY < 0) {
+					fill(0);
+					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+					fill(255);
+					vertex(mouseX, mouseY);
+					fill(0);
+					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+				} else {
+					fill(0);
+					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+					fill(0);
+					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+					fill(255);
+					vertex(mouseX, mouseY);
+				}
 			}
-		}
+		endShape();
 	}
 	
 }
