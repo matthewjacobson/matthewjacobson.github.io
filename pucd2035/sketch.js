@@ -7,6 +7,8 @@ let paths;
 let walls;
 let floodSize;
 
+let test;
+
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
 	let steps = 10;
@@ -166,6 +168,7 @@ function setup() {
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
 	floodSize = 100;
+	test = 0;
 }
 
 function drawCases(a, b, c, num) {
@@ -308,7 +311,7 @@ function draw() {
 	let a = {x: 100, y: 150};
 	let b = {x: 200, y: 200};
 	let c = {x: 400, y: 350};
-	drawCases(a, b, c, 0);
+	drawCases(a, b, c, test % 6);
 	fill(255, 0, 0);
 	ellipse(a.x, a.y, 2);
 	
@@ -380,5 +383,6 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
-	
+	console.log(test);
+	test++;
 }
