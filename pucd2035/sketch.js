@@ -168,6 +168,70 @@ function setup() {
 	floodSize = 100;
 }
 
+function drawCases(a, b, c, num) {
+	switch (num) {
+		case 0:
+			beginShape();
+				fill(255);
+				vertex(a.x, a.y);
+				fill(0);
+				vertex(b.x, b.y);
+				fill(0);
+				vertex(c.x, c.y);
+			endShape();
+			break;
+		case 1:
+			beginShape();
+				fill(255);
+				vertex(a.x, a.y);
+				fill(0);
+				vertex(c.x, c.y);
+				fill(0);
+				vertex(b.x, b.y);
+			endShape();
+			break;
+		case 2:
+			beginShape();
+				fill(0);
+				vertex(b.x, b.y);
+				fill(255);
+				vertex(a.x, a.y);
+				fill(0);
+				vertex(c.x, c.y);
+			endShape();
+			break;
+		case 3:
+			beginShape();
+				fill(0);
+				vertex(b.x, b.y);
+				fill(0);
+				vertex(c.x, c.y);
+				fill(255);
+				vertex(a.x, a.y);
+			endShape();
+			break;
+		case 4:
+			beginShape();
+				fill(0);
+				vertex(c.x, c.y);
+				fill(255);
+				vertex(a.x, a.y);
+				fill(0);
+				vertex(b.x, b.y);
+			endShape();
+			break;
+		case 5:
+			beginShape();
+				fill(0);
+				vertex(c.x, c.y);
+				fill(0);
+				vertex(b.x, b.y);
+				fill(255);
+				vertex(a.x, a.y);
+			endShape();
+			break;
+}
+
 function draw() {
 	background(0);
 	noStroke();
@@ -211,34 +275,97 @@ function draw() {
 // 		}
 // 	endShape(CLOSE);
 	
-	for (let i = 0; i < flood.length; i++) {
-		beginShape();
-			if (flood[i % flood.length].x - mouseX < 0 && flood[(i + 1) % flood.length].x - mouseX <= 0) {
-					fill(255);
-					vertex(mouseX, mouseY);
-					fill(0);
-					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-					fill(0);
-					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-			} else {
-				if (flood[i % flood.length].y - mouseY < 0) {
-					fill(0);
-					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-					fill(255);
-					vertex(mouseX, mouseY);
-					fill(0);
-					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-				} else {
-					fill(0);
-					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-					fill(0);
-					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-					fill(255);
-					vertex(mouseX, mouseY);
-				}
-			}
-		endShape();
-	}
+// 	for (let i = 0; i < flood.length; i++) {
+// 		beginShape();
+// 			if (flood[i % flood.length].x - mouseX < 0 && flood[(i + 1) % flood.length].x - mouseX <= 0) {
+// 					fill(255);
+// 					vertex(mouseX, mouseY);
+// 					fill(0);
+// 					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+// 					fill(0);
+// 					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+// 			} else {
+// 				if (flood[i % flood.length].y - mouseY < 0) {
+// 					fill(0);
+// 					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+// 					fill(255);
+// 					vertex(mouseX, mouseY);
+// 					fill(0);
+// 					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+// 				} else {
+// 					fill(0);
+// 					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+// 					fill(0);
+// 					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+// 					fill(255);
+// 					vertex(mouseX, mouseY);
+// 				}
+// 			}
+// 		endShape();
+// 	}
+	
+	let a = {x: 80, y: 60};
+	let b = {x: 160, y: 120};
+	let c = {x: 240, y: 180};
+	drawCases(a, b, c, 0);
+	fill(255, 0, 0);
+	ellipse(a.x, a.y, 2);
+	
+// 	for (let i = 0; i < flood.length; i++) {
+// 		let a = {x: mouseX, y: mouseY};
+// 		let b = {x: flood[i % flood.length].x, y: flood[i % flood.length].y};
+// 		let c = {x: flood[(i + 1) % flood.length].x, y: flood[(i + 1) % flood.length].y};
+// 		if (a.x < b.x && b.x < c.x) {
+// 			if (a.y < b.y && b.y < c.y) {
+// 				drawCases(a, b, c, 0);
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else {
+// 			}
+// 		} else if (a.x < c.x && c.x < b.x) {
+// 			if (a.y < b.y && b.y < c.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else {
+// 			}
+// 		} else if (a.x < c.x && c.x < b.x) {
+// 			if (a.y < b.y && b.y < c.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else {
+// 			}
+// 		} else if (a.x < c.x && c.x < b.x) {
+// 			if (a.y < b.y && b.y < c.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else {
+// 			}
+// 		} else if (a.x < c.x && c.x < b.x) {
+// 			if (a.y < b.y && b.y < c.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else {
+// 			}
+// 		} else {
+// 			if (a.y < b.y && b.y < c.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else if (a.y < c.y && c.y < b.y) {
+// 			} else {
+// 			}
+// 		}
+// 	}
 	
 }
 
