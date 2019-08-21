@@ -230,10 +230,17 @@ function draw() {
 		beginShape();
 			fill(255);
 			vertex(mouseX, mouseY);
-			fill(0);
-			vertex(flood[index % flood.length].x, flood[index % flood.length].y);
-			fill(0);
-			vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+			if (flood[index % flood.length].x < 0 && flood[(index + 1) % flood.length].x < 0) {
+				fill(0);
+				vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+				fill(0);
+				vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+			} else {
+				fill(0);
+				vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
+				fill(0);
+				vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+			}
 		endShape();
 	if (pressed) console.log(index);
 	pressed = false;
