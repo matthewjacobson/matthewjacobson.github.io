@@ -309,8 +309,8 @@ function draw() {
 // 	}
 	
 	let a = {x: 100, y: 150};
-	let b = {x: 200, y: 200};
-	let c = {x: 400, y: 350};
+	let b = {x: 200, y: 350};
+	let c = {x: 400, y: 200};
 	drawCases(a, b, c, test % 6);
 	fill(255, 0, 0);
 	ellipse(a.x, a.y, 2);
@@ -321,7 +321,8 @@ function draw() {
 // 		let c = {x: flood[(i + 1) % flood.length].x, y: flood[(i + 1) % flood.length].y};
 // 		if (a.x < b.x && b.x < c.x) {
 // 			if (a.y < b.y && b.y < c.y) {
-// 				drawCases(a, b, c, 0);
+// 				drawCases(a, b, c, 1);
+// 				drawCases(a, b, c, 3);
 // 			} else if (a.y < c.y && c.y < b.y) {
 // 			} else if (a.y < c.y && c.y < b.y) {
 // 			} else if (a.y < c.y && c.y < b.y) {
@@ -383,6 +384,6 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
-	console.log(test);
+	console.log(test % 6);
 	test++;
 }
