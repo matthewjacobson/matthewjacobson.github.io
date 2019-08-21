@@ -228,9 +228,9 @@ function draw() {
 // 	}
 	
 		beginShape();
-			fill(255);
-			vertex(mouseX, mouseY);
 			if (flood[index % flood.length].x - mouseX < 0 && flood[(index + 1) % flood.length].x - mouseX < 0) {
+				fill(255);
+				vertex(mouseX, mouseY);
 				fill(0);
 				vertex(flood[index % flood.length].x, flood[index % flood.length].y);
 				fill(0);
@@ -240,6 +240,8 @@ function draw() {
 				vertex(flood[(index + 1) % flood.length].x, flood[(index + 1) % flood.length].y);
 				fill(0);
 				vertex(flood[index % flood.length].x, flood[index % flood.length].y);
+				fill(255);
+				vertex(mouseX, mouseY);
 			}
 		endShape();
 	if (pressed) console.log(index);
