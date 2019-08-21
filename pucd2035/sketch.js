@@ -219,22 +219,21 @@ function draw() {
 				vertex(flood[i % flood.length].x, flood[i % flood.length].y);
 				fill(0);
 				vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+		} else {
+			if (flood[i % flood.length].y - mouseY < 0) {
+				fill(0);
+				vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+				fill(255);
+				vertex(mouseX, mouseY);
+				fill(0);
+				vertex(flood[i % flood.length].x, flood[i % flood.length].y);
 			} else {
-				if (flood[i % flood.length].y - mouseY < 0) {
-					fill(0);
-					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-					fill(255);
-					vertex(mouseX, mouseY);
-					fill(0);
-					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-				} else {
-					fill(0);
-					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-					fill(0);
-					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-					fill(255);
-					vertex(mouseX, mouseY);
-				}
+				fill(0);
+				vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
+				fill(0);
+				vertex(flood[i % flood.length].x, flood[i % flood.length].y);
+				fill(255);
+				vertex(mouseX, mouseY);
 			}
 		}
 	}
