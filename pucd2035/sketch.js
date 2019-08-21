@@ -214,6 +214,7 @@ function draw() {
 			vertex(mouseX, mouseY);
 			fill(0);
 			vertex(flood[i].x, flood[i].y);
+			fill(0);
 			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
 		endShape();
 	}
