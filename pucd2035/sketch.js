@@ -215,7 +215,7 @@ function draw() {
 			fill(0);
 			vertex(flood[i].x, flood[i].y);
 			vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-		endShape(CLOSE);
+		endShape();
 	}
 	
 }
