@@ -215,7 +215,7 @@ function draw() {
 	 		y = mouseY + 50 * sin(angle);
 	 	}
 	 	let flood = getFlood({x: x, y: y});
- 		begindShape();
+ 		beginShape(TRIANGLES);
  			for (let i = 0; i < flood.length; i++) {
 	 			vertex(flood[i].x, flood[i].y);
 	 		}
