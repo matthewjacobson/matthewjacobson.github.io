@@ -7,9 +7,6 @@ let paths;
 let walls;
 let floodSize;
 
-let test;
-let ordering;
-
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
 	let steps = 10;
@@ -169,396 +166,62 @@ function setup() {
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
 	floodSize = 100;
-	test = 0;
-	ordering = 0;
 }
 
-function drawCases(a, b, c, num) {
-	switch (num) {
-		case 0:
-			beginShape();
-				fill(255);
-				vertex(a.x, a.y);
-				fill(0);
-				vertex(b.x, b.y);
-				fill(0);
-				vertex(c.x, c.y);
-			endShape();
-			break;
-		case 1:
-			beginShape();
-				fill(255);
-				vertex(a.x, a.y);
-				fill(0);
-				vertex(c.x, c.y);
-				fill(0);
-				vertex(b.x, b.y);
-			endShape();
-			break;
-		case 2:
-			beginShape();
-				fill(0);
-				vertex(b.x, b.y);
-				fill(255);
-				vertex(a.x, a.y);
-				fill(0);
-				vertex(c.x, c.y);
-			endShape();
-			break;
-		case 3:
-			beginShape();
-				fill(0);
-				vertex(b.x, b.y);
-				fill(0);
-				vertex(c.x, c.y);
-				fill(255);
-				vertex(a.x, a.y);
-			endShape();
-			break;
-		case 4:
-			beginShape();
-				fill(0);
-				vertex(c.x, c.y);
-				fill(255);
-				vertex(a.x, a.y);
-				fill(0);
-				vertex(b.x, b.y);
-			endShape();
-			break;
-		case 5:
-			beginShape();
-				fill(0);
-				vertex(c.x, c.y);
-				fill(0);
-				vertex(b.x, b.y);
-				fill(255);
-				vertex(a.x, a.y);
-			endShape();
-			break;
+function getFlood(pos) {
+	let flood = [];
+	for (let i = 0; i < 20; i++) {
+		let angle = 2 * Math.PI * i / 20 - Math.PI;
+		let ray = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
+		let cast = getRayCast(ray);
+		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
 	}
+	for (let i = 0; i < walls.length; i++) {
+		let angle = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x);
+		let distance = dist(pos.x, pos.y, walls[i].x1, walls[i].y1);
+		if (distance < floodSize) {
+			let ray = {x: pos.x, y: pos.y, dx: distance * Math.cos(angle), dy: distance * Math.sin(angle)};
+			let cast = getRayCast(ray);
+			flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+		}
+		let angleLeft = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x) - 0.1;
+		let rayLeft = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angleLeft), dy: floodSize * Math.sin(angleLeft)};
+		let castLeft = getRayCast(rayLeft);
+		flood.push({angle: angleLeft, x: castLeft.intersection.x, y: castLeft.intersection.y});
+		let angleRight = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x) + 0.1;
+		let rayRight = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angleRight), dy: floodSize * Math.sin(angleRight)};
+		let castRight = getRayCast(rayRight);
+		flood.push({angle: angleRight, x: castRight.intersection.x, y: castRight.intersection.y});
+	}
+	flood.sort((a, b) => a.angle - b.angle);
+	return flood;
 }
 
 function draw() {
 	background(0);
 	noStroke();
-	fill(255);
 	translate(-windowWidth / 2, -windowHeight / 2);
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
-	let flood = [];
-	for (let i = 0; i < 20; i++) {
-		let angle = 2 * Math.PI * i / 20 - Math.PI;
-		let ray = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
-		let cast = getRayCast(ray);
-		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
-	}
-	for (let i = 0; i < walls.length; i++) {
-		let angle = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX);
-		let distance = dist(mouseX, mouseY, walls[i].x1, walls[i].y1);
-		if (distance < floodSize) {
-			let ray = {x: mouseX, y: mouseY, dx: distance * Math.cos(angle), dy: distance * Math.sin(angle)};
-			let cast = getRayCast(ray);
-			flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
-		}
-		let angleLeft = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX) - 0.1;
-		let rayLeft = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angleLeft), dy: floodSize * Math.sin(angleLeft)};
-		let castLeft = getRayCast(rayLeft);
-		flood.push({angle: angleLeft, x: castLeft.intersection.x, y: castLeft.intersection.y});
-		let angleRight = Math.atan2(walls[i].y1 - mouseY, walls[i].x1 - mouseX) + 0.1;
-		let rayRight = {x: mouseX, y: mouseY, dx: floodSize * Math.cos(angleRight), dy: floodSize * Math.sin(angleRight)};
-		let castRight = getRayCast(rayRight);
-		flood.push({angle: angleRight, x: castRight.intersection.x, y: castRight.intersection.y});
-	}
-	flood.sort((a, b) => a.angle - b.angle);
 
-	if (frameCount == 1) {
-		console.log(flood);
-	}
-// 	beginShape();
-// 		for (let i = 0; i < flood.length; i++) {
-// 			vertex(flood[i].x, flood[i].y);
-// 		}
-// 	endShape(CLOSE);
-	
-// 	for (let i = 0; i < flood.length; i++) {
-// 		beginShape();
-// 			if (flood[i % flood.length].x - mouseX < 0 && flood[(i + 1) % flood.length].x - mouseX <= 0) {
-// 					fill(255);
-// 					vertex(mouseX, mouseY);
-// 					fill(0);
-// 					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-// 					fill(0);
-// 					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-// 			} else {
-// 				if (flood[i % flood.length].y - mouseY < 0) {
-// 					fill(0);
-// 					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-// 					fill(255);
-// 					vertex(mouseX, mouseY);
-// 					fill(0);
-// 					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-// 				} else {
-// 					fill(0);
-// 					vertex(flood[i % flood.length].x, flood[i % flood.length].y);
-// 					fill(0);
-// 					vertex(flood[(i + 1) % flood.length].x, flood[(i + 1) % flood.length].y);
-// 					fill(255);
-// 					vertex(mouseX, mouseY);
-// 				}
-// 			}
-// 		endShape();
-// 	}
-	
-// 	let a;
-// 	let b;
-// 	let c;
-// 	if ((ordering % 36) == 0) {
-// 		let x1
-// 		a = {x: 100, y: 150};
-// 		b = {x: 200, y: 200};
-// 		c = {x: 400, y: 350};
-// 	} else if ((ordering % 36) == 1) {
-// 		a = {x: 100, y: 150};
-// 		b = {x: 200, y: 350};
-// 		c = {x: 400, y: 200};
-// 	} else if ((ordering % 36) == 2) {
-// 		a = {x: 100, y: 200};
-// 		b = {x: 200, y: 150};
-// 		c = {x: 400, y: 350};
-// 	} else if ((ordering % 36) == 3) {
-// 		a = {x: 100, y: 350};
-// 		b = {x: 200, y: 150};
-// 		c = {x: 400, y: 200};
-// 	} else if ((ordering % 36) == 4) {
-// 		a = {x: 100, y: 200};
-// 		b = {x: 200, y: 350};
-// 		c = {x: 400, y: 150};
-// 	} else if ((ordering % 36) == 5) {
-// 		a = {x: 100, y: 350};
-// 		b = {x: 200, y: 200};
-// 		c = {x: 400, y: 150};
-// //--------------------------------------------------
-// 	} else if ((ordering % 36) == 6) {
-// 		a = {x: 100, y: 150};
-// 		b = {x: 400, y: 200};
-// 		c = {x: 200, y: 350};
-// 	} else if ((ordering % 36) == 7) {
-// 		a = {x: 100, y: 150};
-// 		b = {x: 400, y: 350};
-// 		c = {x: 200, y: 200};
-// 	} else if ((ordering % 36) == 8) {
-// 		a = {x: 100, y: 200};
-// 		b = {x: 400, y: 150};
-// 		c = {x: 200, y: 350};
-// 	} else if ((ordering % 36) == 9) {
-// 		a = {x: 100, y: 350};
-// 		b = {x: 400, y: 150};
-// 		c = {x: 200, y: 200};
-// 	} else if ((ordering % 36) == 10) {
-// 		a = {x: 100, y: 200};
-// 		b = {x: 400, y: 350};
-// 		c = {x: 200, y: 150};
-// 	} else if ((ordering % 36) == 11) {
-// 		a = {x: 100, y: 350};
-// 		b = {x: 400, y: 200};
-// 		c = {x: 200, y: 150};
-// //--------------------------------------------------
-// 	} else if ((ordering % 36) == 12) {
-// 		a = {x: 200, y: 150};
-// 		b = {x: 100, y: 200};
-// 		c = {x: 400, y: 350};
-// 	} else if ((ordering % 36) == 13) {
-// 		a = {x: 200, y: 150};
-// 		b = {x: 100, y: 350};
-// 		c = {x: 400, y: 200};
-// 	} else if ((ordering % 36) == 14) {
-// 		a = {x: 200, y: 200};
-// 		b = {x: 100, y: 150};
-// 		c = {x: 400, y: 350};
-// 	} else if ((ordering % 36) == 15) {
-// 		a = {x: 200, y: 350};
-// 		b = {x: 100, y: 150};
-// 		c = {x: 400, y: 200};
-// 	} else if ((ordering % 36) == 16) {
-// 		a = {x: 200, y: 200};
-// 		b = {x: 100, y: 350};
-// 		c = {x: 400, y: 150};
-// 	} else if ((ordering % 36) == 17) {
-// 		a = {x: 200, y: 350};
-// 		b = {x: 100, y: 200};
-// 		c = {x: 400, y: 150};
-// //--------------------------------------------------
-// 	} else if ((ordering % 36) == 18) {
-// 		a = {x: 400, y: 150};
-// 		b = {x: 100, y: 200};
-// 		c = {x: 200, y: 350};
-// 	} else if ((ordering % 36) == 19) {
-// 		a = {x: 400, y: 150};
-// 		b = {x: 100, y: 350};
-// 		c = {x: 200, y: 200};
-// 	} else if ((ordering % 36) == 20) {
-// 		a = {x: 400, y: 200};
-// 		b = {x: 100, y: 150};
-// 		c = {x: 200, y: 350};
-// 	} else if ((ordering % 36) == 21) {
-// 		a = {x: 400, y: 350};
-// 		b = {x: 100, y: 150};
-// 		c = {x: 200, y: 200};
-// 	} else if ((ordering % 36) == 22) {
-// 		a = {x: 400, y: 200};
-// 		b = {x: 100, y: 350};
-// 		c = {x: 200, y: 150};
-// 	} else if ((ordering % 36) == 23) {
-// 		a = {x: 400, y: 350};
-// 		b = {x: 100, y: 200};
-// 		c = {x: 200, y: 150};
-// //--------------------------------------------------
-// 	} else if ((ordering % 36) == 24) {
-// 		a = {x: 200, y: 150};
-// 		b = {x: 400, y: 200};
-// 		c = {x: 100, y: 350};
-// 	} else if ((ordering % 36) == 25) {
-// 		a = {x: 200, y: 150};
-// 		b = {x: 400, y: 350};
-// 		c = {x: 100, y: 200};
-// 	} else if ((ordering % 36) == 26) {
-// 		a = {x: 200, y: 200};
-// 		b = {x: 400, y: 150};
-// 		c = {x: 100, y: 350};
-// 	} else if ((ordering % 36) == 27) {
-// 		a = {x: 200, y: 350};
-// 		b = {x: 400, y: 150};
-// 		c = {x: 100, y: 200};
-// 	} else if ((ordering % 36) == 28) {
-// 		a = {x: 200, y: 200};
-// 		b = {x: 400, y: 350};
-// 		c = {x: 100, y: 150};
-// 	} else if ((ordering % 36) == 29) {
-// 		a = {x: 200, y: 350};
-// 		b = {x: 400, y: 200};
-// 		c = {x: 100, y: 150};
-// //--------------------------------------------------
-// 	} else if ((ordering % 36) == 30) {
-// 		a = {x: 400, y: 150};
-// 		b = {x: 200, y: 200};
-// 		c = {x: 100, y: 350};
-// 	} else if ((ordering % 36) == 31) {
-// 		a = {x: 400, y: 150};
-// 		b = {x: 200, y: 350};
-// 		c = {x: 100, y: 200};
-// 	} else if ((ordering % 36) == 32) {
-// 		a = {x: 400, y: 200};
-// 		b = {x: 200, y: 150};
-// 		c = {x: 100, y: 350};
-// 	} else if ((ordering % 36) == 33) {
-// 		a = {x: 400, y: 350};
-// 		b = {x: 200, y: 150};
-// 		c = {x: 100, y: 200};
-// 	} else if ((ordering % 36) == 34) {
-// 		a = {x: 400, y: 200};
-// 		b = {x: 200, y: 350};
-// 		c = {x: 100, y: 150};
-// 	} else if ((ordering % 36) == 35) {
-// 		a = {x: 400, y: 350};
-// 		b = {x: 200, y: 200};
-// 		c = {x: 100, y: 150};
-// 	}
-// 	drawCases(a, b, c, test % 6);
-// 	fill(255, 0, 0);
-// 	ellipse(a.x, a.y, 2);
-	
-	for (let i = 0; i < flood.length; i++) {
-		let a = {x: mouseX, y: mouseY};
-		let b = {x: flood[i % flood.length].x, y: flood[i % flood.length].y};
-		let c = {x: flood[(i + 1) % flood.length].x, y: flood[(i + 1) % flood.length].y};
-		if (a.x < b.x && b.x < c.x) {
-			if (a.y < b.y && b.y < c.y) {
-				drawCases(a, b, c, 2);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 2);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 2);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else {
-				drawCases(a, b, c, 2);
-			}
-		} else if (a.x < c.x && c.x < b.x) {
-			if (a.y < b.y && b.y < c.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 2);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 2);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 2);
-			} else {
-				drawCases(a, b, c, 2);
-			}
-		} else if (a.x < c.x && c.x < b.x) {
-			if (a.y < b.y && b.y < c.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 2);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else {
-				drawCases(a, b, c, 2);
-			}
-		} else if (a.x < c.x && c.x < b.x) {
-			if (a.y < b.y && b.y < c.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else {
-				drawCases(a, b, c, 0);
-			}
-		} else if (a.x < c.x && c.x < b.x) {
-			if (a.y < b.y && b.y < c.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 2);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 3);
-			} else {
-				drawCases(a, b, c, 2);
-			}
-		} else {
-			if (a.y < b.y && b.y < c.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else if (a.y < c.y && c.y < b.y) {
-				drawCases(a, b, c, 0);
-			} else {
-				drawCases(a, b, c, 0);
-			}
-		}
-	}
-	
+	fill(255, 100);
+ 	for (int i = -1; i < 5; i++) {
+ 		let x = mouseX;
+ 		let y = mouseY;
+ 		if (i >= 0) {
+	 		let angle = 2 * Math.PI * i / 5;
+	 		x = mouseX + 50 * cos(angle);
+	 		y = mouseY + 50 * sin(angle);
+	 	}
+	 	let flood = getFlood({x: x, y: y});
+ 		begindShape();
+ 			for (let i = 0; i < flood.length; i++) {
+	 			vertex(flood[i].x, flood[i].y);
+	 		}
+ 		endShape(CLOSE);
+ 	}
+
 }
 
 function windowResized() {
@@ -571,16 +234,5 @@ function mouseWheel(event) {
 }
 
 function keyPressed() {
-	if (keyCode === LEFT_ARROW) {
-		test--;
-		if (test < 0) test += 6;
-	} else if (keyCode === RIGHT_ARROW) {
-		test++;
-	} else if (keyCode === DOWN_ARROW) {
-		ordering--;
-		if (ordering < 0) ordering += 36;
-	} else if (keyCode === UP_ARROW) {
-		ordering++;
-	}
-	console.log("Ordering: " + ordering + ", Case: " + test);	
+
 }
