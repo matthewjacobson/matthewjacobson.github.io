@@ -165,7 +165,7 @@ function setup() {
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
-	floodSize = 100;
+	floodSize = 500;
 }
 
 function getFlood(pos) {
@@ -211,8 +211,8 @@ function draw() {
  		let y = mouseY;
  		if (i >= 0) {
 	 		let angle = 2 * Math.PI * i / 5;
-	 		x = mouseX + 50 * cos(angle);
-	 		y = mouseY + 50 * sin(angle);
+	 		x = mouseX + 5 * cos(angle);
+	 		y = mouseY + 5 * sin(angle);
 	 	}
 	 	let flood = getFlood({x: x, y: y});
  		beginShape();
