@@ -206,7 +206,7 @@ function draw() {
 	}
 
 	fill(255, 100);
- 	for (int i = -1; i < 5; i++) {
+ 	for (let i = -1; i < 5; i++) {
  		let x = mouseX;
  		let y = mouseY;
  		if (i >= 0) {
