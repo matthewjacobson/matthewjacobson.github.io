@@ -206,7 +206,7 @@ function draw() {
 	}
 
 	fill(255, 100);
- 	for (let i = -1; i < 0; i++) {
+ 	for (let i = -1; i < 5; i++) {
  		let x = mouseX;
  		let y = mouseY;
  		if (i >= 0) {
@@ -215,7 +215,7 @@ function draw() {
 	 		y = mouseY + 50 * sin(angle);
 	 	}
 	 	let flood = getFlood({x: x, y: y});
- 		beginShape(TRIANGLES);
+ 		beginShape();
  			for (let i = 0; i < flood.length; i++) {
 	 			vertex(flood[i].x, flood[i].y);
 	 		}
