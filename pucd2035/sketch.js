@@ -229,9 +229,9 @@ function draw() {
 	background(0);
 	stroke(255);
 	translate(-windowWidth / 2, -windowHeight / 2);
-	for (let i = 0; i < walls.length; i++) {
-		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
-	}
+// 	for (let i = 0; i < walls.length; i++) {
+// 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
+// 	}
 	noStroke();
 	let blurRadius = 10;
 	let blurCount = 0;
