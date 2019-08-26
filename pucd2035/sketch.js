@@ -155,7 +155,7 @@ function getRayCast(ray) {
 			}
 		}
 	}
-	return {bHit: hit, intersection: intersect};
+	return {bHit: hit, intersection: intersect, dist: minDist};
 }
 
 function setup() {
@@ -165,13 +165,14 @@ function setup() {
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
-	floodSize = 200;
+	floodSize = 100;
 }
 
 function getFlood(pos) {
 	let flood = [];
-	for (let i = 0; i < 20; i++) {
-		let angle = 2 * Math.PI * i / 20 - Math.PI;
+	let countSamples = 50;
+	for (let i = 0; i < countSamples; i++) {
+		let angle = 2 * Math.PI * i / countSamples - Math.PI;
 		let ray = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
 		let cast = getRayCast(ray);
 		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
@@ -204,22 +205,29 @@ function draw() {
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
-
-	fill(255, 50);
- 	for (let i = -1; i < 10; i++) {
+	let blurRadius = 10;
+	let blurCount = 20;
+ 	for (let i = -1; i < blurCount; i++) {
  		let x = mouseX;
  		let y = mouseY;
  		if (i >= 0) {
-	 		let angle = 2 * Math.PI * i / 10;
-	 		x = mouseX + 2 * cos(angle);
-	 		y = mouseY + 2 * sin(angle);
+	 		let angle = 2 * Math.PI * i / blurCount;
+	 		x = mouseX + blurRadius * cos(angle);
+	 		y = mouseY + blurRadius * sin(angle);
 	 	}
 	 	let flood = getFlood({x: x, y: y});
- 		beginShape();
+ 		beginShape(TRIANGLE_FAN);
+ 			fill(255, 255 / blurCount);
+ 			vertex(mouseX, mouseY);
  			for (let i = 0; i < flood.length; i++) {
+ 				let distance = dist(mouseX, mouseY, flood[i].x, flood[i].y);
+ 				fill(map(distance, 0, floodSize, 255, 0), 255 / blurCount);
 	 			vertex(flood[i].x, flood[i].y);
 	 		}
- 		endShape(CLOSE);
+			let distance = dist(mouseX, mouseY, flood[0].x, flood[0].y);
+			fill(map(distance, 0, floodSize, 255, 0), 255 / blurCount);
+	 		vertex(flood[0].x, flood[0].y);
+ 		endShape();
  	}
 
 }
