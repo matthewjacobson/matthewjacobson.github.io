@@ -158,7 +158,6 @@ function getRayCast(ray, levels) {
 		}
 	}
 	intersections.sort((a, b) => a.dist - b.dist);
-	// return {bHit: hit, intersection: intersect, dist: minDist};
 	let output = [];
 	for (let i = 0; i < levels; i++) {
 		output.push(intersections[Math.min(intersections.length - 1, i)]);
@@ -192,15 +191,21 @@ function getFlood(pos, levels) {
 		}
 	}
 	for (let i = 0; i < walls.length; i++) {
-		let angle = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x);
-		let distance = dist(pos.x, pos.y, walls[i].x1, walls[i].y1);
-		if (distance < floodSize) {
-			let ray = {x: pos.x, y: pos.y, dx: distance * Math.cos(angle), dy: distance * Math.sin(angle)};
-			let cast = getRayCast(ray, levels);
-			for (let l = 0; l < levels; l++) {
-				flood[l].push({angle: angle, x: cast[l].intersection.x, y: cast[l].intersection.y});
-			}
+
+		let angle1 = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x);
+		let ray1 = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angle1), dy: floodSize * Math.sin(angle1)};
+		let cast1 = getRayCast(ray1, levels);
+		for (let l = 0; l < levels; l++) {
+			flood[l].push({angle: angle1, x: cast1[l].intersection.x, y: cast1[l].intersection.y});
 		}
+
+		let angle2 = Math.atan2(walls[i].y2 - pos.y, walls[i].x2 - pos.x);
+		let ray2 = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angle2), dy: floodSize * Math.sin(angle2)};
+		let cast2 = getRayCast(ray2, levels);
+		for (let l = 0; l < levels; l++) {
+			flood[l].push({angle: angle2, x: cast2[l].intersection.x, y: cast2[l].intersection.y});
+		}
+
 		let angleLeft = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x) - 0.1;
 		let rayLeft = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angleLeft), dy: floodSize * Math.sin(angleLeft)};
 		let castLeft = getRayCast(rayLeft, levels);
@@ -229,7 +234,7 @@ function draw() {
 	}
 	noStroke();
 	let blurRadius = 10;
-	let blurCount = 0;
+	let blurCount = 3;
 	let floodLevels = 3;
  	for (let i = -1; i < blurCount; i++) {
  		let x = mouseX;
@@ -252,15 +257,18 @@ function draw() {
 				let distance = dist(mouseX, mouseY, flood[l][0].x, flood[l][0].y);
 				fill(map(distance, 0, floodSize, 255 / (l + 1), 0));
 		 		vertex(flood[l][0].x, flood[l][0].y);
-	 		endShape();
+	 		endShape(CLOSE);
 	 	}
  	}
-
 }
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 	getWalls();
+}
+
+function mouseClicked() {
+	
 }
 
 function mouseWheel(event) {
