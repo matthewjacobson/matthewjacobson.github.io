@@ -139,8 +139,9 @@ function lineLineIntersection(l1, l2) {
 	}
 }
 
-function getRayCast(ray) {
+function getRayCast(ray, levels) {
 	let hit = false;
+	let intersections = [{bHit: false, dist: dist(ray.x, ray.y, ray.x + ray.dx, ray.y + ray.dy), intersection: {x: ray.x + ray.dx, y: ray.y + ray.dy}}];
 	let intersect = {x: ray.x + ray.dx, y: ray.y + ray.dy};
 	let rayLine = {x1: ray.x, y1: ray.y, x2: ray.x + ray.dx, y2: ray.y + ray.dy};
 	let minDist = dist(ray.x, ray.y, ray.x + ray.dx, ray.y + ray.dy);
@@ -149,13 +150,20 @@ function getRayCast(ray) {
 		if (checkIntersect.bIntersect) {
 			hit = true;
 			let currDist = dist(ray.x, ray.y, checkIntersect.x, checkIntersect.y);
+			intersections.push({bHit: true, dist: currDist, intersection: {x: checkIntersect.x, y: checkIntersect.y}});
 			if (currDist < minDist) {
 				minDist = currDist;
 				intersect = {x: checkIntersect.x, y: checkIntersect.y};
 			}
 		}
 	}
-	return {bHit: hit, intersection: intersect, dist: minDist};
+	intersections.sort((a, b) => a.dist - b.dist);
+	// return {bHit: hit, intersection: intersect, dist: minDist};
+	let output = [];
+	for (let i = 0; i < levels; i++) {
+		output.push(intersections[Math.min(intersections.length - 1, i)]);
+	}
+	return output;
 }
 
 function setup() {
@@ -168,45 +176,61 @@ function setup() {
 	floodSize = 100;
 }
 
-function getFlood(pos) {
+function getFlood(pos, levels) {
 	let flood = [];
+	for (let i = 0; i < levels; i++) {
+		let level = [];
+		flood.push(level);
+	}
 	let countSamples = 50;
 	for (let i = 0; i < countSamples; i++) {
 		let angle = 2 * Math.PI * i / countSamples - Math.PI;
 		let ray = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angle), dy: floodSize * Math.sin(angle)};
-		let cast = getRayCast(ray);
-		flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+		let cast = getRayCast(ray, levels);
+		for (let l = 0; l < levels; l++) {
+			flood[l].push({angle: angle, x: cast[l].intersection.x, y: cast[l].intersection.y});
+		}
 	}
 	for (let i = 0; i < walls.length; i++) {
 		let angle = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x);
 		let distance = dist(pos.x, pos.y, walls[i].x1, walls[i].y1);
 		if (distance < floodSize) {
 			let ray = {x: pos.x, y: pos.y, dx: distance * Math.cos(angle), dy: distance * Math.sin(angle)};
-			let cast = getRayCast(ray);
-			flood.push({angle: angle, x: cast.intersection.x, y: cast.intersection.y});
+			let cast = getRayCast(ray, levels);
+			for (let l = 0; l < levels; l++) {
+				flood[l].push({angle: angle, x: cast[l].intersection.x, y: cast[l].intersection.y});
+			}
 		}
 		let angleLeft = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x) - 0.1;
 		let rayLeft = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angleLeft), dy: floodSize * Math.sin(angleLeft)};
-		let castLeft = getRayCast(rayLeft);
-		flood.push({angle: angleLeft, x: castLeft.intersection.x, y: castLeft.intersection.y});
+		let castLeft = getRayCast(rayLeft, levels);
+		for (let l = 0; l < levels; l++) {
+			flood[l].push({angle: angleLeft, x: castLeft[l].intersection.x, y: castLeft[l].intersection.y});
+		}
 		let angleRight = Math.atan2(walls[i].y1 - pos.y, walls[i].x1 - pos.x) + 0.1;
 		let rayRight = {x: pos.x, y: pos.y, dx: floodSize * Math.cos(angleRight), dy: floodSize * Math.sin(angleRight)};
-		let castRight = getRayCast(rayRight);
-		flood.push({angle: angleRight, x: castRight.intersection.x, y: castRight.intersection.y});
+		let castRight = getRayCast(rayRight, levels);
+		for (let l = 0; l < levels; l++) {
+			flood[l].push({angle: angleRight, x: castRight[l].intersection.x, y: castRight[l].intersection.y});
+		}
 	}
-	flood.sort((a, b) => a.angle - b.angle);
+	for (let l = 0; l < levels; l++) {
+		flood[l].sort((a, b) => a.angle - b.angle);
+	}
 	return flood;
 }
 
 function draw() {
 	background(0);
-	noStroke();
+	stroke(255);
 	translate(-windowWidth / 2, -windowHeight / 2);
 	for (let i = 0; i < walls.length; i++) {
 		line(walls[i].x1, walls[i].y1, walls[i].x2, walls[i].y2);
 	}
+	noStroke();
 	let blurRadius = 10;
 	let blurCount = 0;
+	let floodLevels = 3;
  	for (let i = -1; i < blurCount; i++) {
  		let x = mouseX;
  		let y = mouseY;
@@ -215,19 +239,21 @@ function draw() {
 	 		x = mouseX + blurRadius * cos(angle);
 	 		y = mouseY + blurRadius * sin(angle);
 	 	}
-	 	let flood = getFlood({x: x, y: y});
- 		beginShape(TRIANGLE_FAN);
- 			fill(255, 255 / blurCount);
- 			vertex(mouseX, mouseY);
- 			for (let i = 0; i < flood.length; i++) {
- 				let distance = dist(mouseX, mouseY, flood[i].x, flood[i].y);
- 				fill(map(distance, 0, floodSize, 255, 0), 255 / blurCount);
-	 			vertex(flood[i].x, flood[i].y);
-	 		}
-			let distance = dist(mouseX, mouseY, flood[0].x, flood[0].y);
-			fill(map(distance, 0, floodSize, 255, 0), 255 / blurCount);
-	 		vertex(flood[0].x, flood[0].y);
- 		endShape();
+	 	let flood = getFlood({x: x, y: y}, floodLevels);
+	 	for (let l = floodLevels - 1; l >= 0; l--) {
+	 		beginShape(TRIANGLE_FAN);
+	 			fill(255 / (l + 1));
+	 			vertex(mouseX, mouseY);
+	 			for (let i = 0; i < flood[l].length; i++) {
+	 				let distance = dist(mouseX, mouseY, flood[l][i].x, flood[l][i].y);
+	 				fill(map(distance, 0, floodSize, 255 / (l + 1), 0));
+		 			vertex(flood[l][i].x, flood[l][i].y);
+		 		}
+				let distance = dist(mouseX, mouseY, flood[l][0].x, flood[l][0].y);
+				fill(map(distance, 0, floodSize, 255 / (l + 1), 0));
+		 		vertex(flood[l][0].x, flood[l][0].y);
+	 		endShape();
+	 	}
  	}
 
 }
