@@ -1,4 +1,4 @@
-let string = 'readings';
+let string = 'read';
 
 let canvas;
 let font;
@@ -10,7 +10,7 @@ let floodSize;
 
 function getBezierPoints(x1, y1, x2, y2, x3, y3, x4, y4) {
 	let output = [];
-	let steps = 10;
+	let steps = 5;
 	let xMin = x1;
 	let xMax = x1;
 	let yMin = y1;
