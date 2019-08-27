@@ -175,7 +175,7 @@ function setup() {
 	paths = outline.paths;
 	boundingBox = {x: outline.xMin, y: outline.yMin, w: outline.xMax - outline.xMin, h: outline.yMax - outline.yMin};
 	getWalls();
-	floodSize = 100;
+	floodSize = 0.5 * Math.min(windowWidth, windowHeight);
 }
 
 function getFlood(pos, levels) {
@@ -275,7 +275,8 @@ function mouseClicked() {
 }
 
 function mouseWheel(event) {
-	floodSize = Math.max(50, Math.min(500, floodSize + Math.max(-2, Math.min(2, event.delta))));
+	let minWindowSize = Math.min(windowWidth, windowHeight);
+	floodSize = Math.max(50, Math.min(minWindowSize, floodSize + Math.max(-10, Math.min(10, event.delta))));
 }
 
 function keyPressed() {
