@@ -1,4 +1,4 @@
-let string = 'readings';
+let string = 'read';
 
 let canvas;
 let font;
