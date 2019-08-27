@@ -1,5 +1,6 @@
 let string = 'hello';
 
+let canvas;
 let font;
 let fontData;
 let boundingBox;
@@ -166,7 +167,9 @@ function getRayCast(ray, levels) {
 }
 
 function setup() {
-	createCanvas(windowWidth, windowHeight, WEBGL);
+	canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+	canvas.position(0, 0);
+	canvas.style('z-index', '-1');
 	font = opentype.parse(fontData.bytes.buffer);
 	let outline = getPathOutline(font.getPath(string, 0, 0, 72).commands);
 	paths = outline.paths;
